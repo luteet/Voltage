@@ -1,0 +1,164 @@
+.misson {
+
+	@include _1000 {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: 0 20px;
+	}
+
+	// .misson__section-name
+
+	&__section-name {
+		@include _1000 {
+			grid-column: 12 span;
+		}
+	}
+
+	// .misson__title
+
+	&__title {
+		
+		margin-top: 14.133333vw;
+		.line:nth-child(2) .line-body {
+			padding-left: 22%;
+		}
+		.line:last-child .line-body {
+			padding-left: 22%;
+		}
+		@include _550 {
+			margin-top: 9.636364vw;
+		}
+		@include _1000 {
+			grid-column: 12 span;
+			margin-top: -0.6ch; margin-right: -1ch;
+			.line:first-child .line-body {
+				padding-left: 15%;
+			}
+		}
+	}
+
+	// .misson__image
+
+	&__image {
+		display: none;
+
+		@include _1000 {
+			display: block;
+			user-select: none; pointer-events: none;
+			grid-column: 7 span;
+			position: relative;
+			img {
+				position: absolute;
+				left: 0; top: 0;
+				width: 157.7%; height: auto;
+				transform: translate(-46%,11%);
+			}
+		}
+	}
+
+	// .misson__accordion
+
+	&__accordion {
+
+		margin-top: 12.8vw;
+
+		@include _550 {
+			margin-top: 8.727273vw;
+		}
+
+		@include _1000 {
+			margin-top: 5.416667vw;
+			grid-column: 5 span;
+		}
+
+		// .misson__accordion--block
+
+		&--block {
+			padding: 5.866667vw 0;
+			@include _550 {
+				padding: 4vw 0;
+			}
+			@include _1000 {
+				padding: 2.292vw 0;
+			}
+			border-top: max(1px, 0.069vw) solid rgba(255, 255, 255, 0.22);
+			&:last-child {
+				border-bottom: max(1px, 0.069vw) solid rgba(255, 255, 255, 0.22);
+			}
+		}
+
+		// .misson__accordion--target
+
+		&--target {
+			display: block;
+			position: relative;
+			width: 100%;
+			text-align: left;
+
+			background: transparent;
+			font-weight: 400;
+			font-size: 5.866667vw;
+			@include _550 {
+				font-size: 4vw;
+			}
+			
+			@include _1000 {
+				font-size: 1.944444vw;
+			}
+			line-height: 152.2%;
+
+			color: var(--white);
+
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0; top: 50%;
+				width: 100%; height: calc(100% + 4.583vw);
+				transform: translate(0,-50%);
+			}
+
+			&-plus {
+				position: absolute;
+				right: 0; top: 50%;
+				transform: translate3d(0,-50%,0.0001px);
+				width: 4.533333vw; height: 4.533333vw;
+				@include _550 {
+					width: 3.090909vw; height: 3.090909vw;
+				}
+				@include _1000 {
+					width: 1.528vw; height: 1.528vw;
+				}
+				opacity: .4;
+				&::before, &::after {
+					content: '';
+					position: absolute;
+					left: 0; top: 50%;
+					width: 100%; height: max(0.139vw, 1px);
+					transform: translate3d(0,-50%,0.0001px);
+					background: var(--white);
+					transition: transform .3s ease;
+				}
+
+				&::before {
+					transform: translate3d(0,-50%,0.0001px) rotate(90deg);
+				}
+			}
+		}
+
+		&--block._active &--target-plus::before {
+			transform: translate3d(0,-50%,0.0001px) rotate(0deg);
+		}
+
+		// .misson__accordion--content
+
+		&--content {
+			margin-top: 0;
+			height: 0;
+			overflow: hidden;
+
+			.line-body {
+				transform: translate3d(0,120%,0.0002px);
+			}
+		}
+	}
+}

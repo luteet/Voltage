@@ -1,0 +1,185 @@
+@use 'sass:math';
+
+:root {
+	--title-font: 'Neue Machina', sans-serif;
+	--main-font: 'DMSans', sans-serif;
+	
+	--accent: #70FF4D;
+	--accent-active: #44be25;
+
+	--white: #FFF;
+	--black: #18181A;
+
+	--container-padding: 30px;
+	--desktop-container-padding: 80px;
+}
+
+.image-body {
+	width: 100%; position: relative;
+}
+
+.image-body img {
+	position: absolute;
+	left: 0; top: 0;
+	width: 100%; height: 100%;
+	object-fit: cover;
+}
+
+.split-text .line {
+	overflow: hidden;
+}
+
+.anim-text.split-text .line-body, .anim-text-2.split-text .line-body {
+	transform: translate3d(0,110%,0);
+}
+
+html, body {
+	font-size: 16px;
+	min-height: 100%;
+	min-width: 320px;
+
+	background: var(--black);
+	color: var(--white);
+}
+
+body {
+	font-family: var(--main-font);
+	
+	font-weight: 400;
+	line-height: 150%;
+
+	display: flex;
+	flex-direction: column;
+
+	//padding-right: var(--popup-padding);
+
+	&._mob-menu-active {
+		overflow: hidden;
+	}
+
+	&._popup-active {
+		overflow: hidden;
+	}
+	
+}
+
+.section-margin-top {
+	margin-top: 37.333vw;
+	@include _1000 {
+		margin-top: 19.8vw;
+	}
+}
+
+section {
+	position: relative;
+	z-index: 2;
+}
+
+.wrapper {
+	flex: 1 1 auto;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.main {
+	overflow: hidden;
+
+	flex: 1 0 auto;
+	position: relative;
+}
+
+.container {
+	padding-left: var(--container-padding);
+	padding-right: var(--container-padding);
+	
+	@media (min-width: #{$container}px) {
+		padding-left: var(--desktop-container-padding);
+		padding-right: var(--desktop-container-padding);
+	}
+}
+
+.btn {
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	
+	padding: 14px 23px;
+
+	color: var(--white);
+	font-weight: 400;
+	font-size: 0.875rem;
+	line-height: 128.571429%;
+	text-transform: uppercase;
+
+	background: rgba(255, 255, 255, 0.07);
+	border-radius: 30px;
+
+	transition: background .3s ease;
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+	}
+	
+	&:active {
+		background: rgba(255, 255, 255, 0.20);
+	}
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px; height: 1px;
+	margin: -1px; padding: 0;
+	border: 0;
+	
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+.parallax-image-wrapper {
+	isolation: isolate;
+	//clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	/* picture {
+		display: block;
+		position: absolute;
+		left: 0; top: 0;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	} */
+}
+
+.parallax-image-wrapper img {
+	isolation: isolate;
+	//top: -100px;
+	/* height: calc(100% + 200px);
+	transform: translate3d(0,-100px,0);
+	@include _1000 {
+		height: calc(100% + 400px);
+		transform: translate3d(0,-200px,0);
+	} */
+}
+
+.fade-down {
+	opacity: 0;
+	transform: translate3d(0,-50px,0);
+}
+
+.fade-in {
+	opacity: 0;
+}
+
+.link {
+	font-size: max(16px, 4.266667vw);
+	@include _550 {
+		font-size: 2.5vw;
+	}
+	@include _1000 {
+		font-size: 1.111vw;
+		border-bottom: 0.069vw solid var(--white);
+		padding-bottom: 0.278vw;
+	}
+	padding-bottom: 1.067vw;
+	border-bottom: 0.267vw solid var(--white);
+	line-height: 152.2%;
+	color: var(--white);
+}

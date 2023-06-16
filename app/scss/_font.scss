@@ -1,0 +1,122 @@
+
+@font-face {
+	@include font-include('DMSans', 400, swap, normal, 'DMSans-Regular');
+}
+
+@font-face {
+	@include font-include('DMSans', 300, swap, italic, 'DMSans-Italic');
+}
+
+@font-face {
+	@include font-include('Neue Machina', 400, swap, normal, 'NeueMachina-Regular');
+}
+
+@font-face {
+	@include font-include('Neue Machina', 700, swap, normal, 'NeueMachina-Bold');
+}
+
+.large-title {
+	font-family: var(--title-font);
+	font-weight: 400;
+	line-height: 105%;
+	text-transform: uppercase;
+
+	font-size: 14.5vw;
+	@include _550 {
+		font-size: 12vw;
+	}
+	@include _1000 {
+		font-size: 8.2vw;
+	}
+
+	svg {
+		@include _1000 {
+			width: 6.3vw;
+		}
+		width: 11.3vw; height: auto;
+	}
+}
+
+.text {
+	font-size: max(16px, 4.266667vw);
+	@include _550 {
+		font-size: 2.5vw;
+	}
+	@include _1000 {
+		font-size: 1.111111vw;
+	}
+	line-height: 150%;
+	&._min {
+		font-size: max(14px, 3.733vw);
+		@include _550 {
+			font-size: 2vw;
+		}
+		@include _1000 {
+			font-size: 0.972222vw;
+		}
+	}
+}
+
+.split-text {
+	font-kerning: none;
+}
+
+.title {
+	
+	font-family: var(--title-font);
+	font-weight: 400;
+	line-height: 104.882353%;
+	text-transform: uppercase;
+
+	@include _550 {
+		font-size: 9vw;
+	}
+
+	font-size: 11.200vw;
+
+	@include _1000 {
+		font-size: 6.250vw;
+	}
+
+}
+
+.main {
+	counter-reset: sectionNumber;
+}
+
+section:not(:first-child) {
+	counter-increment: sectionNumber;
+}
+
+section:nth-child(-n + 10) .section-name::before {
+	content: "(0"counter(sectionNumber)")";
+}
+
+.section-name {
+
+	font-weight: 400;
+	font-size: 2vw;
+	@include _550 {
+		font-size: 3.200vw;
+	}
+	@include _1000 {
+		font-size: 0.972vw;
+	}
+	font-style: italic;
+	line-height: 152.2%;
+
+	text-transform: uppercase;
+	
+	&::before {
+		
+		content: "("counter(sectionNumber)")";
+	
+		margin-right: 22px;
+	}
+	
+
+}
+
+.txt-center {
+	text-align: center;
+}
