@@ -183,3 +183,72 @@ section {
 	line-height: 152.2%;
 	color: var(--white);
 }
+
+@keyframes minMarquee {
+	from {
+		transform: translate3d(-100%,0,0.0002px);
+	}
+	to {
+		transform: translate3d(150%,0,0.0002px);
+	}
+}
+
+.min-marquee {
+	position: absolute;
+	left: 50%; top: 50%;
+	background: #00FF00;
+	border-radius: 30px;
+	width: 27.466667vw; height: 10.666667vw;
+	@include _550 {
+		width: 17.727273vw; height: 6.272727vw;
+	}
+	@include _1000 {
+		width: 9.722222vw; height: 3.125vw;
+	}
+	white-space: nowrap;
+	color: var(--black);
+
+	display: flex;
+	align-items: center;
+
+	overflow: hidden;
+	pointer-events: none;
+
+	font-family: var(--main-font);
+	text-transform: none;
+
+	> span {
+		flex-shrink: 0;
+		margin: 0;
+		display: block;
+		//padding: 10px 20%;
+		min-width: 100%;
+		white-space: nowrap;
+		animation-name: marqueeLine;
+		animation-duration: 5s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+
+		> span {
+			display: inline-block;
+			padding-right: 2.666667vw;
+			@include _550 {
+				padding-right: 1.818182vw;
+			}
+			@include _1000 {
+				padding-right: 0.694444vw;
+			}
+		}
+	}
+}
+
+
+@keyframes marqueeLine {
+	from {
+	  transform: translateX(0);
+	}
+	
+	to {
+	  transform: translateX(-100%);
+	}
+  }

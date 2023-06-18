@@ -95,7 +95,8 @@ function scriptsLib() {
 		'node_modules/gsap/dist/gsap.min.js',
 		'node_modules/split-type/umd/index.min.js',
 		'app/js/ScrollSmoother.min.js', // GSAP
-		'app/js/MorphSVGPlugin3.min.js', // GSAP
+		//'app/js/MorphSVGPlugin3.min.js', // GSAP
+		//'node_modules/canvas-image-cover/index.js', // GSAP
 		//'node_modules/@splidejs/splide-extension-grid/dist/js/splide-extension-grid.min.js', // Сетка для слайдера | npm install @splidejs/splide-extension-grid --save-dev | https://splidejs.com/guides/getting-started/
 		//'node_modules/vanilla-lazyload/dist/lazyload.min.js', // Lazyload img | npm i vanilla-lazyload --save-dev | https://www.npmjs.com/package/vanilla-lazyload
 		//'node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js', // Полифил для window.scroll() | npm i smoothscroll-polyfill --save-dev
@@ -193,7 +194,7 @@ function stylesOriginal() {
 function stylesLib() {
 	return src([
 		'node_modules/normalize.css/normalize.css',
-		//'node_modules/@splidejs/splide/dist/css/splide.min.css', // Слайдер
+		'node_modules/@splidejs/splide/dist/css/splide.min.css', // Слайдер
 		//'node_modules/@splidejs/splide/dist/css/splide-core.min.css', // Слайдер
 		//'node_modules/swiper/swiper-bundle.min.css', // Слайдер
 		//'node_modules/slim-select/dist/slimselect.css', // Select

@@ -34,6 +34,12 @@
 			.line:first-child .line-body {
 				padding-left: 15%;
 			}
+			.line:nth-child(2) .line-body {
+				padding-left: 0;
+			}
+			.line:last-child .line-body {
+				padding-left: 0;
+			}
 		}
 	}
 

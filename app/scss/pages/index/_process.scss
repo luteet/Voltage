@@ -1,0 +1,265 @@
+.process {
+
+	padding-top: 14.933333vw; padding-bottom: 14.933333vw;
+
+	@include _550 {
+		padding-top: 10.181818vw; padding-bottom: 10.181818vw;
+	}
+
+	@include _1000 {
+		padding-top: 6.597222vw; padding-bottom: 6.597222vw;
+	}
+	min-height: min(73.472222vw, 1058px);
+
+	display: grid;
+
+	// .process__bg-slider
+
+	&__bg-slider {
+
+		position: absolute;
+		left: 0; top: 0;
+		width: 100%; height: 100%;
+		z-index: -1;
+
+		user-select: none; pointer-events: none;
+		overflow: hidden;
+
+		&--canvas {
+			position: absolute;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			background: #ccc;
+			z-index: -1;
+		}
+
+		/* .splide__track--fade>.splide__list>.splide__slide {
+			opacity: 1;
+			z-index: auto;
+			&.is-active.is-visible {
+				z-index: 1;
+			}
+		} */
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			background: var(--black);
+			opacity: 0.6;
+		}
+
+		// .process__bg-slider--track
+
+		/* &--track {
+			height: 100%;
+		}
+
+		// .process__bg-slider--list
+
+		&--list {
+			height: 100%;
+		}
+
+		// .process__bg-slider--slide
+
+		&--slide {
+			position: relative;
+			width: 100%; height: 100%;
+			img {
+				position: absolute;
+				left: 0; top: 0;
+				width: 100%; height: 100%;
+				object-fit: cover;
+			}
+		} */
+	}
+
+	// .process__bg-slide
+
+	&__bg-slide {
+
+		clip-path: url(#real);
+		&.is-visible.is-active {
+			//clip-path: url(#real);
+			z-index: 1;
+		}
+
+		opacity: 1;
+		z-index: auto;
+
+		// .process__bg-slide--image
+
+		&--image {
+		}
+	}
+
+	// .process__block
+
+	&__block {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	// .process__section-name
+
+	&__section-name {
+	}
+
+	// .process__slider
+
+	&__slider {
+
+		margin-top: 4.722222vw;
+		flex: 1 1 auto;
+
+		display: flex;
+		flex-direction: column;
+
+		// .process__slider--track
+
+		&--track {
+			flex: 1 1 auto;
+		}
+
+		// .process__slider--list
+
+		&--list {
+		}
+
+		// .process__slider--slide
+
+		&--slide {
+		}
+
+		// .process__slider--arrows
+
+		&--arrows {
+
+			display: flex;
+			justify-content: space-between;
+
+			width: calc(100vw - (var(--container-padding) * 2));
+			margin-top: 10vw;
+			
+			@include _1000 {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 2.083333vw;
+				width: 9.861111vw;
+				margin-top: 0;
+			}
+
+		}
+
+		// .process__slider--arrow
+
+		&--arrow {
+			position: static;
+			width: 14.933333vw; height: 14.933333vw;
+			@include _550 {
+				width: 10.181818vw; height: 10.181818vw;
+			}
+			@include _1000 {
+				width: 3.888889vw; height: 3.888889vw;
+			}
+			background: var(--white);
+			opacity: 1;
+			transition: opacity .3s ease;
+			transform: none;
+			svg {
+				width: 50%; height: auto;
+				pointer-events: none;
+			}
+			&.splide__arrow--prev svg {
+				transform: none;
+			}
+		}
+	}
+
+	// .process__slide
+
+	&__slide {
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		max-width: calc(100vw - (var(--container-padding) * 2));
+
+		// .process__slide--title
+
+		&--title {
+			&-wrapper {
+				position: relative;
+				.min-marquee {
+					position: absolute;
+					right: 0; top: 0;
+					transform: translate(50%,50%) rotate(10deg);
+					@include _550 {
+						left: 50%; top: 50%;
+						transform: translate(-170%,-70%) rotate(13deg);
+					}
+					opacity: 0;
+				}
+			}
+			.line:nth-child(2) .line-body {
+				padding-left: 20%;
+			}
+
+			@include _550 {
+				.line:nth-child(2) .line-body {
+					padding-left: 0%;
+				}
+				.line .line-body {
+					transform: translate3d(0,120%,0);
+				}
+			}
+
+			@include _1000 {
+				.line:not(:first-child) .line-body {
+					padding-left: 2ch;
+				}
+			}
+		}
+
+		// .process__slide--content
+
+		&--content {
+			margin-top: 4vw;
+			display: grid;
+			gap: 2.545455vw 20px;
+			@include _1000 {
+				grid-template-columns: repeat(12,1fr);
+				gap: 0.972222vw 20px;
+				padding-left: 4%;
+			}
+		}
+
+		// .process__slide--content-block
+
+		&--content-block {
+			&:not(:first-child) {
+				display: none;
+				@include _550 {
+					display: block;
+				}
+			}
+			@include _550 {
+				.line .line-body {
+					transform: translate3d(0,120%,0);
+				}
+			}
+			@include _1000 {
+				grid-column: 7/12;
+			}
+
+			/* .line .line-body {
+				transform: translate3d(0,120%,0);
+			} */
+			
+		}
+	}
+}
