@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "voltage",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -33,6 +33,7 @@
     "gulp-zip": "^4.2.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.45.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "split-type": "^0.3.3",
     "wilderness": "^5.1.2"
   }

@@ -5,12 +5,31 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+		.preloader {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: #18181A;
+			z-index: 6;
+		}
+	</style>
 	<link rel="stylesheet" href="css/style-critical.min.css">
 	<link rel="stylesheet" href="css/style.min.css">
 </head>
 
 <body>
-
+	<div class="preloader container">
+		<div class="preloader__block">
+			<div class="preloader__progress">
+				<div class="preloader__progress--value"></div>
+			</div>
+			<div class="preloader__loaded">0</div>
+			<div class="preloader__text" data-loaded-text="Loaded">Loading</div>
+		</div>
+	</div>
 	<div class="wrapper" id="smooth-wrapper">
 		<div class="content" id="smooth-content">
 			<header class="header container">
@@ -26,18 +45,28 @@
 					<div class="header__nav--body">
 						<ul class="header__nav--list">
 							<li>
-								<a href="#">
-									Link 1
+								<a href="#company">
+									Company
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									Link 2
+								<a href="#misson">
+									Misson
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									Link 3
+								<a href="#process">
+									Process
+								</a>
+							</li>
+							<li>
+								<a href="#blog">
+									Blog
+								</a>
+							</li>
+							<li>
+								<a href="#feedback">
+									Feedback
 								</a>
 							</li>
 						</ul>
@@ -78,7 +107,7 @@
 						</div>
 					</div>
 				</section>
-				<section class="company container anim-section">
+				<section class="company container anim-section" id="company">
 					<h2 class="company__section-name section-name">
 						Company
 					</h2>
@@ -156,7 +185,7 @@
 						</div>
 					</div>
 				</div>
-				<section class="misson container anim-section section-margin-top">
+				<section class="misson container anim-section section-margin-top" id="misson">
 					<h2 class="misson__section-name section-name">
 						Mission
 					</h2>
@@ -200,7 +229,7 @@
 						</div>
 					</div>
 				</section>
-				<section class="process container anim-section section-margin-top">
+				<section class="process container anim-section section-margin-top" id="process">
 					<div class="process__bg-slider parallax-image-wrapper">
 						<canvas class="process__bg-slider--canvas parallax-image" width="1200" height="980"></canvas>
 						<div class="process__bg-slider--list">
@@ -208,37 +237,6 @@
 							<div class="process__bg-slider--image" data-url="img/index/hero/hero-image.jpg"></div>
 							<div class="process__bg-slider--image" data-url="https://images.unsplash.com/photo-1508791290064-c27cc1ef7a9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80"></div>
 						</div>
-						<!-- <div class="process__bg-slider--track splide__track">
-					<ul class="process__bg-slider--list splide__list">
-						<li class="process__bg-slider--slide process__bg-slide splide__slide">
-							<div class="process__bg-slide--image">
-								<picture>
-									<source srcset="img/index/process/process-slide-image.avif" type="image/avif">
-									<source srcset="img/index/process/process-slide-image.webp" type="image/webp">
-									<img src="img/index/process/process-slide-image.jpg" alt="" width="1280" height="720" loading="lazy">
-								</picture>
-							</div>
-						</li>
-						<li class="process__bg-slider--slide process__bg-slide splide__slide">
-							<div class="process__bg-slide--image">
-								<picture>
-									<source srcset="img/index/process/process-slide-image.avif" type="image/avif">
-									<source srcset="img/index/hero/hero-image.webp" type="image/webp">
-									<img src="img/index/hero/hero-image.jpg" alt="" width="1280" height="720" loading="lazy">
-								</picture>
-							</div>
-						</li>
-						<li class="process__bg-slider--slide process__bg-slide splide__slide">
-							<div class="process__bg-slide--image">
-								<picture>
-									<source srcset="img/index/process/process-slide-image.avif" type="image/avif">
-									<source srcset="img/index/process/process-slide-image.webp" type="image/webp">
-									<img src="img/index/process/process-slide-image.jpg" alt="" width="1280" height="720" loading="lazy">
-								</picture>
-							</div>
-						</li>
-					</ul>
-				</div> -->
 					</div>
 					<div class="process__block">
 						<h2 class="process__section-name section-name">
@@ -294,13 +292,13 @@
 									</li>
 								</ul>
 							</div>
-							<div class="process__slider--arrows splide__arrows">
-								<button class="process__slider--arrow splide__arrow splide__arrow--prev" type="button" title="Prev slide">
+							<div class="process__slider--arrows">
+								<button class="process__slider--arrow _prev" type="button" title="Prev slide">
 									<svg width="22" height="20" viewBox="0 0 22 20">
 										<use xlink:href="img/sprites.svg#arrow-slider-prev"></use>
 									</svg>
 								</button>
-								<button class="process__slider--arrow splide__arrow splide__arrow--next" type="button" title="Next slide">
+								<button class="process__slider--arrow _next" type="button" title="Next slide">
 									<svg width="22" height="20" viewBox="0 0 22 20">
 										<use xlink:href="img/sprites.svg#arrow-slider-next"></use>
 									</svg>
@@ -309,7 +307,7 @@
 						</div>
 					</div>
 				</section>
-				<section class="blog container anim-section section-margin-top">
+				<section class="blog container anim-section section-margin-top" id="blog">
 					<h2 class="blog__section-name section-name">
 						Blog
 					</h2>
@@ -326,18 +324,18 @@
 											Insights
 										</div>
 										<div class="blog__duration">
-											5 min
+											10 min
 										</div>
 									</div>
 									<h4 class="blog__min-title">
-										Sources
+										Academy
 									</h4>
 									<div class="blog__content text">
-										Batteries are specifically designed to meet the requirements of these industries. Thanks to the use of ecological redox flow technology, they are also excellent in terms of safety and durability.
+										With Voltoges‘s commercial storage solutions, commercial and agricultural businesses can optimize their own consumption and thus increase their profitability and independence from the power grid. Voltoges‘s Commercial
 									</div>
-									<div class="blog__footer">
-										<time class="blog__date" datetime="06-06-2023">06 Jun 2023</time>
-										<div class="blog__author">Elizabeth Ericson</div>
+									<div class="blog__footer text">
+										<time class="blog__date" datetime="05-06-2023">05 Jun 2023</time>
+										<div class="blog__author">Michael Johnson</div>
 									</div>
 								</a>
 							</li>
@@ -357,7 +355,7 @@
 									<div class="blog__content text">
 										Batteries are specifically designed to meet the requirements of these industries. Thanks to the use of ecological redox flow technology, they are also excellent in terms of safety and durability.
 									</div>
-									<div class="blog__footer">
+									<div class="blog__footer text">
 										<time class="blog__date" datetime="06-06-2023">06 Jun 2023</time>
 										<div class="blog__author">Elizabeth Ericson</div>
 									</div>
@@ -370,67 +368,88 @@
 											Insights
 										</div>
 										<div class="blog__duration">
-											5 min
+											8 min
 										</div>
 									</div>
 									<h4 class="blog__min-title">
-										Sources
+										Applications
 									</h4>
 									<div class="blog__content text">
-										Batteries are specifically designed to meet the requirements of these industries. Thanks to the use of ecological redox flow technology, they are also excellent in terms of safety and durability.
+										In light of advancing political and social efforts to combat climate change, the energy supply is currently in a state of comprehensive change. The generation and use of climate-friendly forms of energy is of crucial importance in this context.
 									</div>
-									<div class="blog__footer">
-										<time class="blog__date" datetime="06-06-2023">06 Jun 2023</time>
-										<div class="blog__author">Elizabeth Ericson</div>
+									<div class="blog__footer text">
+										<time class="blog__date" datetime="22-06-2023">22 Jun 2023</time>
+										<div class="blog__author">Michael Johnson</div>
 									</div>
 								</a>
 							</li>
 						</ul>
 					</div>
 				</section>
-				<div style="width: 100%; height: 2000px;"></div>
+				<section class="feedback container anim-section section-margin-top" id="feedback">
+					<div class="feedback__col fade-in">
+						<div class="feedback__icon">
+							<picture>
+								<source srcset="img/index/feedback/feedback-icon.avif" type="image/avif">
+								<source srcset="img/index/feedback/feedback-icon.webp" type="image/webp">
+								<img src="img/index/feedback/feedback-icon.png" alt="" width="30" height="30" loading="lazy">
+							</picture>
+						</div>
+					</div>
+					<div class="feedback__col">
+						<h2 class="feedback__title title anim-text split-text">
+							Don’t be shy it’s time to say hello! send us email
+						</h2>
+						<div class="feedback__footer fade-in">
+							<a href="#" class="feedback__link link">
+								Write email to us
+							</a>
+						</div>
+					</div>
+				</section>
 			</main>
 
-			<!-- <footer class="footer container">
-			<a href="index.html" class="footer__logo">
-				<img src="img/logo.svg" width="150" height="35" loading="lazy" alt="Logo" class="footer__logo--img">
-			</a>
-			<nav class="footer__nav">
-				<ul>
-					<li>
-						<a href="#">
-							
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</footer> -->
+			<footer class="marquee section-margin-top">
+				<h2 class="marquee__title visually-hidden">
+					Renewable energy. Revolutionary technology.
+				</h2>
+				<div class="marquee__container">
+					<div class="marquee__item _none-rotate" data-marquee-speed="0.05">
+						<div class="marquee__item--element">
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>&nbsp;
+						</div>
+						<div class="marquee__item--element">
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>
+							lets connect <svg width="58" height="39" viewBox="0 0 58 39">
+								<use xlink:href="img/sprites.svg#decor-arrow-next"></use>
+							</svg>&nbsp;
+						</div>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</div>
 
 	<div class="blog__cursor" data-append-marquee="<span>Coming soon</span><span>Coming soon</span><span>Coming soon</span>">
-		<div class="blog__cursor--item" style="background-image: url(img/index/blog/blog-cursor-image.webp);">
-			<!-- <picture>
-				<source srcset="img/index/blog/blog-cursor-image.avif" type="image/avif">
-				<source srcset="img/index/blog/blog-cursor-image.webp" type="image/webp">
-				<img src="img/index/blog/blog-cursor-image.jpg" alt="" width="0" height="0" loading="lazy">
-			</picture> -->
-		</div>
-		<div class="blog__cursor--item" style="background-image: url(img/index/process/process-slide-image.webp);">
-			<!-- <picture>
-				<source srcset="img/index/process/process-slide-image.avif" type="image/avif">
-				<source srcset="img/index/process/process-slide-image.webp" type="image/webp">
-				<img src="img/index/process/process-slide-image.jpg" alt="" width="0" height="0" loading="lazy">
-			</picture> -->
-		</div>
-		<div class="blog__cursor--item" style="background-image: url(img/index/hero/hero-image.webp);">
-			<!-- <picture>
-				<source srcset="img/index/hero/hero-image.avif" type="image/avif">
-				<source srcset="img/index/hero/hero-image.webp" type="image/webp">
-				<img src="img/index/hero/hero-image.jpg" alt="" width="0" height="0" loading="lazy">
-			</picture> -->
-		</div>
+		<div class="blog__cursor--item" style="background-image: url(img/index/blog/blog-cursor-image.webp);"></div>
+		<div class="blog__cursor--item" style="background-image: url(img/index/process/process-slide-image.webp);"></div>
+		<div class="blog__cursor--item" style="background-image: url(img/index/hero/hero-image.webp);"></div>
 	</div>
+
+
 
 	<script src="js/libs.min.js"></script>
 	<script src="js/main.min.js"></script>

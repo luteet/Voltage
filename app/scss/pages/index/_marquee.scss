@@ -1,5 +1,9 @@
 .marquee {
 
+	&:is(footer) {
+		overflow: hidden;
+	}
+
 	// .marquee__title
 
 	&__title {
@@ -26,6 +30,10 @@
 			&:nth-child(2) {
 				transform: translate3d(0,-25%,0) rotate(4deg);
 			}
+
+			&._none-rotate {
+				transform: none;
+			}
 		}
 		height: 14vw; width: 105vw;
 		margin-left: -2.5vw;
@@ -38,6 +46,10 @@
 
 		&:nth-child(2) {
 			transform: translate3d(0,-0%,0) rotate(3deg);
+		}
+
+		&._none-rotate {
+			transform: none;
 		}
 
 		// .marquee__item--element

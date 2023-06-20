@@ -9,6 +9,28 @@ const
 
 
 
+// =-=-=-=-=-=-=-=-=-=- <Get-device-type> -=-=-=-=-=-=-=-=-=-=-
+
+const getDeviceType = () => {
+
+	const ua = navigator.userAgent;
+	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+		return "tablet";
+	}
+
+	if (
+		/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+		ua
+		)
+	) {
+		return "mobile";
+	}
+	return "desktop";
+
+};
+
+// =-=-=-=-=-=-=-=-=-=- </Get-device-type> -=-=-=-=-=-=-=-=-=-=-
+
 
 
 // =-=-=-=-=-=-=-=-=-=- <image-aspect-ratio> -=-=-=-=-=-=-=-=-=-=-
@@ -64,13 +86,6 @@ function runSplit() {
 
 }
 
-/* setTimeout(() => {
-
-	
-
-	
-
-},0) */
 
 class LoopingElement {
 	constructor(element, currentTranslation, speed, go) {
@@ -141,629 +156,1003 @@ class LoopingElement {
 	}
 }
 
-/* let imagesArray = document.querySelectorAll(".images-wrapper");
-
-let newLol = new LoopingElement(imagesArray[0], 0, 0.1);
-let highLol = new LoopingElement(imagesArray[1], -100, 0.1); */
 let smoother;
+
+const preloader = document.querySelector('.preloader'),
+preloaderBlock = preloader.querySelector('.preloader__block'),
+preloaderProgress = preloader.querySelector('.preloader__progress--value'),
+progressLoaded = preloader.querySelector('.preloader__loaded');
+
+let preloadLoadingValue = {
+	valueNumber: 0,
+};
+
+let preloadTimeline = gsap.timeline(), preloadTimelineValue = gsap.timeline();
+
+document.addEventListener("DOMContentLoaded", function () {
+
+	gsap.set(preloaderProgress, {
+		transform: "scaleX(0)",
+	})
+
+	gsap.to(preloaderBlock, {
+		opacity: 1,
+	})
+
+	preloadTimeline.to(preloaderProgress, {
+		transform: "scaleX(0.99)",
+		duration: 3,
+		delay:0.2,
+	})
+	
+	preloadTimelineValue.to(preloadLoadingValue, {
+		valueNumber: 99,
+		duration: 3,
+		delay: 0.2,
+		onUpdate: function () {
+			progressLoaded.textContent = Math.round(preloadLoadingValue['valueNumber']);
+		}
+	})
+})
 
 window.addEventListener('load', function (event) {
 	runSplit();
 	const animMedia = gsap.matchMedia();
-
-	//ScrollTrigger.disable();
-
 	animMedia.add("(min-width: 1000px)", () => {
 		smoother = ScrollSmoother.create({
-			smooth: 1.5,
+			smooth: 1.2,
 			effects: true,
 		});
 
-		const parallaxImage = document.querySelectorAll('.parallax-image');
-		parallaxImage.forEach(parallaxImage => {
-			gsap.set(parallaxImage, {
-				transform: 'translate3d(0,-200px,0)',
-				height: 'calc(100% + 400px)',
-				top: "-200px",
-			})
+		//smoother.paused(true);
+	})
+
+	//preloader.classList.add('_loaded');
+
+	setTimeout(() => {
+		preloadTimeline.to(preloaderProgress, {
+			transform: "scaleX(1)",
+			duration: 0.2,
+			onComplete: function () {
+				preloaderBlock.classList.add('_hidden');
+				setTimeout(() => {
+					gsap.to(preloader, {
+						opacity: 0,
+						duration: 0.4,
+						onComplete: function () {
+							preloader.remove();
+						}
+					})
+				},400)
+				setTimeout(() => {
 	
-			gsap.to(parallaxImage, {
-				scrollTrigger: {
-					scrub: true,
-					trigger: parallaxImage.closest('.parallax-image-wrapper'),
-					start: "top bottom",
+					animMedia.add("(min-width: 1000px)", () => {
+						
+			
+						//smoother.paused(true)
+			
+						const parallaxImage = document.querySelectorAll('.parallax-image');
+						parallaxImage.forEach(parallaxImage => {
+							gsap.set(parallaxImage, {
+								transform: 'translate3d(0,-200px,0)',
+								height: 'calc(100% + 400px)',
+								top: "-200px",
+							})
 					
-					end: "bottom top",
-					//markers: true,
-					  //invalidateOnRefresh: true
-				},
-				transform: 'translate3d(0,200px,0)',
-				ease: "none",
-			})
+							gsap.to(parallaxImage, {
+								scrollTrigger: {
+									scrub: true,
+									trigger: parallaxImage.closest('.parallax-image-wrapper'),
+									start: "top bottom",
+									
+									end: "bottom top",
+									//markers: true,
+									//invalidateOnRefresh: true
+								},
+								transform: 'translate3d(0,200px,0)',
+								ease: "none",
+							})
+						})
+			
+						
+			
+					});
+			
+					animMedia.add("(max-width: 1000px)", () => {
+						/* ScrollTrigger.normalizeScroll(true);
+			
+						smoother = ScrollSmoother.create({
+							smooth: 1,
+							effects: false,
+						}); */
+			
+						gsap.set('.parallax-image', {
+							transform: 'translate3d(0,-100px,0)',
+							height: 'calc(100% + 200px)',
+							top: "-100px",
+						})
+						ScrollTrigger.config({
+							ignoreMobileResize: true
+						});
+						gsap.to('.parallax-image', {
+							scrollTrigger: {
+								scrub: true,
+								trigger: '.parallax-image-wrapper',
+								start: "top bottom",
+								
+								end: "bottom top",
+								//markers: true,
+								//invalidateOnRefresh: true,
+								ignoreMobileResize: true,
+							},
+							transform: 'translate3d(0,100px,0)',
+							ease: "none",
+						})
+			
+						/* gsap.set('.parallax-image-wrapper', {
+							clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+						}) */
+			
+						
+					});
+			
+					const animSections = document.querySelectorAll('.anim-section');
+					animSections.forEach(animSection => {
+						let timeline = gsap.timeline({
+							scrollTrigger: {
+								trigger: animSection,
+								start: 'top center',
+							},
+						});
+						
+						const lines = animSection.querySelectorAll('.anim-text.split-text .line-body');
+						if(lines.length) {
+							timeline.to(lines, {
+								transform: 'translate3d(0,0,0)',
+								duration: 1,
+								delay: 0.2,
+								stagger: 0.15,
+								ease: "power3.out",
+							})
+						}
+			
+						const lines2 = animSection.querySelectorAll('.anim-text-2.split-text .line-body');
+						if(lines2.length) {
+							timeline.to(lines2, {
+								transform: 'translate3d(0,0,0)',
+								duration: 0.5,
+								stagger: 0.1,
+								ease: "power3.out",
+							},"-=1.2")
+						}
+			
+						const fadeIn = animSection.querySelectorAll('.fade-in');
+						fadeIn.forEach(fadeIn => {
+							timeline.to(fadeIn, {
+								duration: 1,
+								opacity: 1,
+								onComplete: function () {
+									fadeIn.classList.add('_animated');
+								}
+							},"-=0.5")
+						})
+			
+						const fadeDown = animSection.querySelectorAll('.fade-down');
+						fadeDown.forEach(fadeDown => {
+							timeline.to(fadeDown, {
+								duration: 1,
+								opacity: 1,
+								transform: 'translate3d(0,0,0)',
+							},"-=0.5")
+						})
+			
+					})
+			
+					let marquee = document.querySelectorAll('.marquee__item');
+					marquee.forEach(marquee => {
+						let marqueeElements = marquee.querySelectorAll(".marquee__item--element"),
+						speed = Number(marquee.dataset.marqueeSpeed),
+						goNext = marquee.dataset.marqueeGoNext == "false" ? false : true;
+			
+						new LoopingElement(marqueeElements[0], 0, speed, goNext);
+						new LoopingElement(marqueeElements[1], -100, speed, goNext);
+					})
+			
+					const minMarquees = document.querySelectorAll('[data-append-marquee]');
+					minMarquees.forEach(minMarquee => {
+						const marquee = document.createElement('div');
+						marquee.innerHTML = `<span>${minMarquee.dataset.appendMarquee}</span><span>${minMarquee.dataset.appendMarquee}</span>`;
+						marquee.classList.add('min-marquee');
+						marquee.classList.add('text');
+						minMarquee.append(marquee);
+					})
+			
+					const blogCursor = document.querySelector('.blog__cursor'),
+					blogItem = document.querySelectorAll('.blog__item');
+			
+					const blogWrapper = document.querySelector('.blog__wrapper'), blogList = document.querySelector('.blog__list');
+			
+					let xTo = gsap.quickTo(blogCursor, "x", {duration: 0.3, ease: "power3"}),
+					yTo = gsap.quickTo(blogCursor, "y", {duration: 0.3, ease: "power3"});
+			
+					blogWrapper.addEventListener('pointermove', function (event) {
+						xTo(event.clientX);
+						yTo(event.clientY);
+					})
+			
+					blogWrapper.addEventListener('pointerenter', function (event) {
+						gsap.set(blogCursor, {x: event.clientX, duration: 0, ease: "power3"});
+						gsap.set(blogCursor, {y: event.clientY, duration: 0, ease: "power3"});
+						blogCursor.classList.add('_hover');
+					});
+			
+					blogWrapper.addEventListener('pointerleave', function (event) {
+						blogCursor.classList.remove('_hover');
+					})
+			
+					blogItem.forEach((blogItem, index) => {
+						blogItem.addEventListener('pointerenter', function (event) {
+							blogCursor.dataset.index = index;
+							blogItem.classList.add('_hover');
+						})
+					})
+
+					// =-=-=-=-=-=-=-=-=-=-=-=- <slider> -=-=-=-=-=-=-=-=-=-=-=-=
+
+					if(document.querySelector('.process__bg-slider') && document.querySelector('.process__slider')) {
+
+						const processSlider = new Splide( '.process__slider', {
+							type: 'fade',
+							speed: 600,
+							waitForTransition: true,
+							pagination: false,
+							rewind: true,
+							arrows: false,
+							drag: false,
+						});
+
+						processSlider.on('mounted', function (event) {
+							setTimeout(() => {
+								//console.log(processSlider.root.querySelectorAll('.splide__slide.is-active .title.split-text .line-body'))
+								gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .title.split-text .line-body'), {
+									scrollTrigger: {
+										trigger: processSlider.root,
+										start: "top bottom",
+									},
+									transform: 'translate3d(0,0,0.0001px)',
+									duration: 0.7,
+									stagger: 0.07,
+								})
+								gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .text.split-text .line-body'), {
+									scrollTrigger: {
+										trigger: processSlider.root,
+										start: "top bottom",
+									},
+									transform: 'translate3d(0,0,0.0001px)',
+									duration: 0.7,
+									delay: 0.5,
+									stagger: 0.07,
+								})
+								gsap.to(processSlider.root.querySelector('.splide__slide.is-active .min-marquee'), {
+									scrollTrigger: {
+										trigger: processSlider.root,
+										start: "top bottom",
+									},
+									opacity: 1,
+									duration: 0.7,
+									delay: 0.7,
+								})
+							},500)
+						})
+
+						//processSlider.sync(processBgSlider);
+						processSlider.mount();
+
+						const canvas = document.querySelector('.process__bg-slider--canvas');
+						
+						const ctx = canvas.getContext("2d");
+						const images = document.querySelectorAll('.process__bg-slider--image'),
+						imagesArray = [];
+						images.forEach(image => {
+							const img = new Image();
+							imagesArray.push(img);
+						})
+						
+						function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
+
+							if (arguments.length === 2) {
+								x = y = 0;
+								w = ctx.canvas.width;
+								h = ctx.canvas.height;
+							}
+						
+							// default offset is center
+							offsetX = typeof offsetX === "number" ? offsetX : 0.5;
+							offsetY = typeof offsetY === "number" ? offsetY : 0.5;
+						
+							// keep bounds [0.0, 1.0]
+							if (offsetX < 0) offsetX = 0;
+							if (offsetY < 0) offsetY = 0;
+							if (offsetX > 1) offsetX = 1;
+							if (offsetY > 1) offsetY = 1;
+						
+							var iw = img.width,
+								ih = img.height,
+								r = Math.min(w / iw, h / ih),
+								nw = iw * r,   // new prop. width
+								nh = ih * r,   // new prop. height
+								cx, cy, cw, ch, ar = 1;
+						
+							// decide which gap to fill    
+							if (nw < w) ar = w / nw;                             
+							if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
+							nw *= ar;
+							nh *= ar;
+						
+							// calc source rectangle
+							cw = iw / (nw / w);
+							ch = ih / (nh / h);
+						
+							cx = (iw - cw) * offsetX;
+							cy = (ih - ch) * offsetY;
+						
+							// make sure source rectangle is valid
+							if (cx < 0) cx = 0;
+							if (cy < 0) cy = 0;
+							if (cw > iw) cw = iw;
+							if (ch > ih) ch = ih;
+						
+							// fill image in dest. rectangle
+							ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
+						}
+						
+						function checkDirection(newIndex, prevIndex, slidesLength) {
+							if(newIndex > prevIndex && (prevIndex != slidesLength && newIndex != 0)) {
+								if(prevIndex == 0 && newIndex == slidesLength) {
+									return "prev";	
+								} else {
+									return "next";
+								}
+							} else if(prevIndex == slidesLength && newIndex == 0) {
+								return "next";
+							} else if(newIndex < prevIndex && newIndex != 0) {
+								return "prev";
+							} else {
+								return "prev";
+							}
+						}
+
+						
+						let lastWidthScreen = window.innerWidth;
+						window.addEventListener('resize', function (event) {
+							if(lastWidthScreen != window.innerWidth) {
+								lastWidthScreen = window.innerWidth;
+								canvas.width = canvas.offsetWidth;
+								canvas.heigh = canvas.offsetHeight;
+								ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+								drawImageProp(ctx, imagesArray[processSlider.index], 0, 0, canvas.width, canvas.height);
+							}
+							
+						})
+
+						let argSlide = {
+							imagePos: 0,
+							imageOpacity: 0,
+						};
+
+						let newIndexSlide = 1, prevIndexSlide = processSlider.length-1;
+
+						processSlider.on('move', function (newIndex, prevIndex) {
+							processSlider.root.classList.add('_moving');
+							processSlider.options['drag'] = false;
+						})
+						
+						let tl = gsap.timeline();
+
+						let prevArrowEnterTimer, nextArrowEnterTimer;
+
+						const prevArrow = processSlider.root.querySelector('.process__slider--arrow._prev'),
+						nextArrow = processSlider.root.querySelector('.process__slider--arrow._next');
+						
+						processSlider.on('moved', function (newIndex, prevIndex) {
+
+							if(prevArrowEnterTimer) clearTimeout(prevArrowEnterTimer);
+							if(nextArrowEnterTimer) clearTimeout(nextArrowEnterTimer);
+
+							newIndexSlide = (newIndex+1 > processSlider.length-1) ? 0 : newIndex+1;
+							prevIndexSlide = (processSlider.index-1 == -1) ? processSlider.length-1 : processSlider.index-1;
+
+							setTimeout(() => {
+
+								tl.pause();
+								tl = gsap.timeline();
+
+								canvas.width = canvas.offsetWidth;
+								canvas.height = canvas.offsetHeight;
+
+								if(checkDirection(newIndex, prevIndex, processSlider.length-1) == 'next') {
+									
+									let size = Math.max(canvas.width, canvas.height);
+
+									//if(nextSlideTimeout) clearTimeout(nextSlideTimeout);
+							
+									function anim(arg) {
+										
+										ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+										ctx.save();
+
+										drawImageProp(ctx, imagesArray[prevIndex], arg.imagePos, 0, canvas.width, canvas.height);
+										ctx.fillStyle = `rgba(0,0,0,${arg.imageOpacity})`;
+										ctx.rect(0, 0, canvas.width, canvas.height);
+										ctx.fill();
+
+										ctx.beginPath();
+										ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+										ctx.clip();
+										
+										drawImageProp(ctx, imagesArray[newIndex], 0, 0, canvas.width, canvas.height);
+
+										ctx.restore();
+										
+									}
+									
+									if(!nextArrow.classList.contains('_hover')) argSlide['clipPosX'] = size + canvas.width;
+									processSlider.root.classList.remove('_arrow-anim');
+									
+									
+									argSlide['imagePos'] = 0;
+									argSlide['imageOpacity'] = 0;
+									
+									//anim(argNext);
+									if(windowSize > 550) {
+										tl.to(argSlide, {
+											clipPosX: size - window.innerWidth/14,
+											duration: 0.8,
+											ease: "power4.inOut",
+											onUpdate: function (event) {
+												anim(argSlide);
+											},
+										})
+									} else {
+										tl.to(argSlide, {
+											clipPosX: size - canvas.width/3,
+											duration: 1,
+											ease: "power4.inOut",
+											onUpdate: function (event) {
+												anim(argSlide);
+											},
+										})
+									}
+
+									tl.to(argSlide, {
+										imageOpacity: 0.5,
+										duration: 0.6,
+										onComplete: function () {
+											argSlide['imageOpacity'] = 0;
+										},
+										ease: "power4.inOut",
+									},'-=0.7')
+
+									if(windowSize > 550) {
+										tl.to(argSlide, {
+											duration: 1,
+											imagePos: -(canvas.width / 3),
+											ease: "power4.inOut",
+											onComplete: function () {
+												argSlide['imagePos'] = 0;
+											},
+										},'-=0.7')
+									}
+
+								} else {
+									
+									let size = Math.max(canvas.width, canvas.height);
+							
+									function anim(arg) {
+										ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+										ctx.save();
+
+										drawImageProp(ctx, imagesArray[prevIndex], arg.imagePos, 0, canvas.width, canvas.height);
+										ctx.fillStyle = `rgba(0,0,0,${arg.imageOpacity})`;
+										ctx.rect(0, 0, canvas.width, canvas.height);
+										ctx.fill();
+
+										ctx.beginPath();
+										ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+										ctx.clip();
+										
+										drawImageProp(ctx, imagesArray[newIndex], 0, 0, canvas.width, canvas.height);
+										
+										ctx.restore();
+										
+									}
+									
+									if(!prevArrow.classList.contains('_hover')) argSlide['clipPosX'] = -size;
+									//if(!processSlider.root.classList.contains('_arrow-anim')) argSlide['clipPosX'] = -size;
+									processSlider.root.classList.remove('_arrow-anim');
+									
+									//if(argSlide['clipPosX'] == -size) argSlide['clipPosX'] = -size;
+									argSlide['imagePos'] = 0;
+									argSlide['imageOpacity'] = 0;
+										/* clipPosX: -(size),
+										imagePos: 0,
+										imageOpacity: 0,
+									} */
+									//processSlider.root.classList.remove('_hover-prev');
+									
+									
+									//anim(argSlide);
+
+									if(windowSize > 550) {
+										tl.to(argSlide, {
+											clipPosX: size - window.innerWidth/14,
+											duration: 0.8,
+											ease: "power4.inOut",
+											onUpdate: function (event) {
+												anim(argSlide);
+											},
+											onComplete: function () {
+												argSlide['clipPosX'] = size;
+											}
+										})
+									} else {
+										tl.to(argSlide, {
+											clipPosX: -size + canvas.width + canvas.width/3,
+											duration: 1,
+											ease: "power4.inOut",
+											onUpdate: function (event) {
+												anim(argSlide);
+											},
+											onComplete: function () {
+												argSlide['clipPosX'] = size;
+											}
+										})
+									}
+
+									tl.to(argSlide, {
+										imageOpacity: 0.5,
+										duration: 0.6,
+										ease: "power4.inOut",
+										onComplete: function () {
+											argSlide['imageOpacity'] = 0;
+										}
+									},'-=0.7')
+
+									if(windowSize > 550) {
+										tl.to(argSlide, {
+											duration: 1,
+											imagePos: canvas.width / 3,
+											ease: "power4.inOut",
+											
+										},'-=0.5')
+									}
+
+									
+								}
+
+								prevArrow.classList.remove('_hover');
+								nextArrow.classList.remove('_hover');
+
+								const activeSlide = processSlider.root.querySelector('.splide__slide.is-active'),
+								textItems = processSlider.root.querySelectorAll('.splide__slide:not(.is-active) .title.split-text .line-body, .splide__slide:not(.is-active) .text.split-text .line-body'),
+								marquee = processSlider.root.querySelectorAll('.splide__slide:not(.is-active) .min-marquee');
+
+								setTimeout(() => {
+									
+									if(window.innerWidth > 550 && activeSlide == processSlider.root.querySelector('.splide__slide.is-active')) {
+										gsap.set(textItems, {
+											transform: 'translate3d(0,120%,0.0001px)',
+										})
+										gsap.to(activeSlide.querySelectorAll('.title.split-text .line-body'), {
+											transform: 'translate3d(0,0,0.0001px)',
+											duration: 0.7,
+											stagger: 0.07,
+											onComplete: function () {
+												gsap.set(textItems, {
+													transform: 'translate3d(0,120%,0.0001px)',
+												})
+											}
+										})
+										gsap.to(activeSlide.querySelectorAll('.text.split-text .line-body'), {
+											transform: 'translate3d(0,0,0.0001px)',
+											duration: 0.7,
+											delay: 0.5,
+											stagger: 0.07,
+											onComplete: function () {
+												gsap.set(textItems, {
+													transform: 'translate3d(0,120%,0.0001px)',
+												})
+											}
+										})
+										gsap.to(activeSlide.querySelector('.min-marquee'), {
+											opacity: 1,
+											duration: 0.7,
+											delay: 0,
+											
+										})
+										gsap.set(marquee, {
+											opacity: 0,
+										})
+										gsap.set(textItems, {
+											transform: 'translate3d(0,120%,0.0001px)',
+										})
+										
+									} else {
+										/* gsap.to(processSlider.root.querySelector('.splide__slide.is-active .min-marquee'), {
+											opacity: 1,
+											duration: 0.7,
+											delay: 0.3,
+											
+										}) */
+										/* gsap.set(processSlider.root.querySelectorAll('.splide__slide:not(.is-active) .min-marquee'), {
+											opacity: 0,
+										}) */
+									}
+
+									gsap.set(processSlider.root.querySelector('.splide__slide:not(.is-active) .min-marquee'), {
+										opacity: 0,
+									})
+									
+									
+								},700)
+
+								
+								
+								/* if(newIndex > prevIndex) {
+									
+								} else {
+									prevSlide(imagesArray[index], (imagesArray[index+1]) ? imagesArray[index+1] : imagesArray[0]);
+								} */
+
+								setTimeout(() => {
+
+									processSlider.root.classList.remove('_moving');
+									//processSlider.options['drag'] = true;
+								},(windowSize > 550) ? 1500 : 500)
+								
+							},0)
+						})
+
+						
+
+						prevArrow.addEventListener('click', function () {
+							if(!processSlider.root.classList.contains('_moving')) {
+								processSlider.go('<');
+							}
+						})
+
+						nextArrow.addEventListener('click', function () {
+							if(!processSlider.root.classList.contains('_moving')) {
+								processSlider.go('>');
+							}
+						})
+
+						let mouse, prevPointMouse = document.querySelector('body');
+
+						let testTimeout;
+						window.addEventListener('mousemove', (event) => {
+							mouse = event.target;
+							if(testTimeout) clearTimeout(testTimeout);
+							testTimeout = setTimeout(() => {
+								prevPointMouse = event.target;
+							},200)
+						});
+
+						let prevArrowLeave, nextArrowLeave;
+
+						prevArrow.addEventListener('pointerenter', function (event) {
+							
+							if(getDeviceType() == "desktop") {
+
+								if(prevArrowEnterTimer) clearTimeout(prevArrowEnterTimer);
+								if(nextArrowEnterTimer) clearTimeout(nextArrowEnterTimer);
+
+								prevArrowEnterTimer = setTimeout(() => {
+									if(!prevArrow.classList.contains('_hover') && !processSlider.root.classList.contains('_moving') && mouse.closest('.process__slider--arrow._prev')) {
+										nextArrowLeave = false;
+
+										prevArrow.classList.add('_hover');
+										processSlider.root.classList.add('_arrow-anim');
+
+										canvas.width = canvas.offsetWidth;
+										canvas.height = canvas.offsetHeight;
+
+										let size = Math.max(canvas.width, canvas.height);
+									
+										function anim(arg) {
+											ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+											ctx.save();
+
+											drawImageProp(ctx, imagesArray[processSlider.index], 0, 0, canvas.width, canvas.height);
+											ctx.fillStyle = `rgba(0,0,0,${arg.imageOpacity})`;
+											ctx.rect(0, 0, canvas.width, canvas.height);
+											ctx.fill();
+
+											ctx.beginPath();
+											ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+											ctx.clip();
+											
+											drawImageProp(ctx, imagesArray[prevIndexSlide], 0, 0, canvas.width, canvas.height);
+											
+											ctx.restore();
+										}
+
+										if(!processSlider.root.classList.contains('_moving')) {
+
+											argSlide['clipPosX'] = -size;
+											anim(argSlide);
+
+											setTimeout(() => {
+												if(!processSlider.root.classList.contains('_moving')) {
+													argSlide['clipPosX'] = -size;
+													anim(argSlide);	
+													gsap.to(argSlide, {
+														clipPosX: -size + window.innerWidth/14,
+														duration: 0.4,
+														ease: "power4.inOut",
+														onUpdate: function (event) {
+															anim(argSlide);
+														},
+														onComplete: function () {
+															processSlider.root.classList.add('_arrow-anim-end')
+														}
+													})
+												}
+											},100)
+
+										}
+									}
+								},(nextArrowLeave) ? 400 : 100)
+
+							}
+							
+						})
+
+						prevArrow.addEventListener('pointerleave', function (event) {
+							
+							if(prevArrow.classList.contains('_hover') && getDeviceType() == "desktop" && !processSlider.root.classList.contains('_moving')) {
+
+								prevArrowLeave = true;
+								prevArrow.classList.remove('_hover');
+
+								/* if(nextSlideTimeout) clearTimeout(nextSlideTimeout);
+								if(prevSlideTimeout) clearTimeout(prevSlideTimeout); */
+
+								canvas.width = canvas.offsetWidth;
+								canvas.height = canvas.offsetHeight;
+
+								let size = Math.max(canvas.width, canvas.height);
+							
+								function anim(arg) {
+									
+									ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+									ctx.save();
+
+									drawImageProp(ctx, imagesArray[processSlider.index], 0, 0, canvas.width, canvas.height);
+
+									ctx.beginPath();
+									
+									ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+									
+									ctx.clip();
+									//ctx.drawImage(imageNext, 0, -window.innerHeight/2, canvas.offsetWidth, canvas.offsetWidth);
+									drawImageProp(ctx, imagesArray[prevIndexSlide], 0, 0, canvas.width, canvas.height);
+									
+									//coverImg(imagePrev, "cover");
+									ctx.restore();
+									//console.log(argSlide['clipPosX']);
+								}
+								
+								//argSlide['clipPosX'] = -size + window.innerWidth/14;
+								anim(argSlide)
+								
+
+								gsap.to(argSlide, {
+									clipPosX: -size,
+									duration: 0.4,
+									ease: "power4.inOut",
+									onUpdate: function (event) {
+										anim(argSlide);
+									},
+								})
+								
+
+								/* setTimeout(() => {
+									processSlider.root.classList.remove('_hover-prev');
+								},1000) */
+							}
+
+						})
+
+						/* nextArrow.addEventListener('pointermove', function (event) {
+							console.log('over');
+						}) */
+
+						
+
+						
+
+						nextArrow.addEventListener('pointerenter', function (event) {
+
+							if(getDeviceType() == "desktop") {
+
+								if(prevArrowEnterTimer) clearTimeout(prevArrowEnterTimer);
+								if(nextArrowEnterTimer) clearTimeout(nextArrowEnterTimer);
+
+								nextArrowEnterTimer = setTimeout(() => {
+									if(!nextArrow.classList.contains('_hover') && !processSlider.root.classList.contains('_moving') && mouse.closest('.process__slider--arrow._next')) {
+										nextArrow.classList.add('_hover');
+										prevArrowLeave = false;
+
+										canvas.width = canvas.offsetWidth;
+										canvas.height = canvas.offsetHeight;
+							
+										let size = Math.max(canvas.width, canvas.height);
+									
+										function anim(arg) {
+											
+											ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+											ctx.save();
+							
+											drawImageProp(ctx, imagesArray[processSlider.index], 0, 0, canvas.width, canvas.height);
+							
+											ctx.beginPath();
+											
+											ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+											
+											ctx.clip();
+											//ctx.drawImage(imageNext, 0, -window.innerHeight/2, canvas.offsetWidth, canvas.offsetWidth);
+											drawImageProp(ctx, imagesArray[newIndexSlide], 0, 0, canvas.width, canvas.height);
+											
+											//coverImg(imagePrev, "cover");
+											ctx.restore();
+											
+										}
+							
+										if(!processSlider.root.classList.contains('_moving')) {
+
+											argSlide['clipPosX'] = size + canvas.width;
+											anim(argSlide)
+											
+											if(!processSlider.root.classList.contains('_moving')) {
+												setTimeout(() => {
+													//argSlide['clipPosX'] = size + canvas.width;
+													anim(argSlide)
+													gsap.to(argSlide, {
+														clipPosX: size * 2 - window.innerWidth / 14,
+														duration: 0.4,
+														ease: "power4.inOut",
+														onUpdate: function (event) {
+															anim(argSlide);
+														},
+														onComplete: function () {
+															processSlider.root.classList.add('_arrow-anim-end')
+														}
+													})
+												},100)
+											}
+										}
+									}
+								},(prevArrowLeave) ? 400 : 100)
+
+							}
+
+						})
+
+						nextArrow.addEventListener('pointerleave', function (event) {
+							
+							if(nextArrow.classList.contains('_hover') && getDeviceType() == "desktop" && !processSlider.root.classList.contains('_moving')) {
+
+								nextArrow.classList.remove('_hover');
+								nextArrowLeave = true;
+
+								/* if(nextSlideTimeout) clearTimeout(nextSlideTimeout);
+								if(prevSlideTimeout) clearTimeout(prevSlideTimeout);
+								if(nextSlideLeaveTimeout) clearTimeout(nextSlideLeaveTimeout); */
+
+								canvas.width = canvas.offsetWidth;
+								canvas.height = canvas.offsetHeight;
+
+								let size = Math.max(canvas.width, canvas.height);
+							
+								function anim(arg) {
+									
+									ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
+									ctx.save();
+
+									drawImageProp(ctx, imagesArray[processSlider.index], 0, 0, canvas.width, canvas.height);
+
+									ctx.beginPath();
+									
+									ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
+									
+									ctx.clip();
+									//ctx.drawImage(imageNext, 0, -window.innerHeight/2, canvas.offsetWidth, canvas.offsetWidth);
+									drawImageProp(ctx, imagesArray[newIndexSlide], 0, 0, canvas.width, canvas.height);
+									
+									//coverImg(imagePrev, "cover");
+									ctx.restore();
+									
+								}
+								
+								//argSlide['clipPosX'] = canvas.width * 2 - window.innerWidth / 14;
+								anim(argSlide);
+								
+								
+								gsap.to(argSlide, {
+									clipPosX: size + canvas.width,
+									duration: 0.4,
+									ease: "power4.inOut",
+									onUpdate: function (event) {
+										anim(argSlide);
+									},
+								})
+								
+								
+
+								
+								/* nextSlideLeaveTimeout = setTimeout(() => {
+									
+								},200) */
+
+								/* setTimeout(() => {
+									processSlider.root.classList.remove('_hover-next');
+								},1000) */
+
+								
+							}
+
+						})
+
+						imagesArray[0].addEventListener('load', function (event) {
+							setTimeout(() => {
+								canvas.width = canvas.offsetWidth;
+								canvas.height = canvas.offsetHeight;
+								ctx.clearRect(0,0,canvas.width, canvas.height)
+								ctx.save();
+								drawImageProp(ctx, imagesArray[0], 0, 0, canvas.width, canvas.height);
+								ctx.restore();
+								
+								/* drawImageProp(ctx, imagesArray[0], 0, 0, canvas.width, canvas.height);
+								drawImageProp(ctx, imagesArray[1], 0, 0, canvas.width, canvas.height); */
+							},500)
+						})
+
+						images.forEach((image, index) => {
+							imagesArray[index].src = image.dataset.url;
+						})
+
+					}
+
+					// =-=-=-=-=-=-=-=-=-=-=-=- </slider> -=-=-=-=-=-=-=-=-=-=-=-=
+			
+					setTimeout(() => {
+						
+						ScrollTrigger.refresh();
+						if(smoother) smoother.paused(false);
+						
+					},100)
+			
+				},1000)
+			}
+		})
+		preloadTimelineValue.to(preloadLoadingValue, {
+			valueNumber: 100,
+			duration: 0.2,
+			onUpdate: function () {
+				progressLoaded.textContent = Math.round(preloadLoadingValue['valueNumber']);
+			}
 		})
 
-		
 
-	});
 
-	animMedia.add("(max-width: 1000px)", () => {
-		/* ScrollTrigger.normalizeScroll(true);
-
-		smoother = ScrollSmoother.create({
-			smooth: 1,
-			effects: false,
-		}); */
-
-		gsap.set('.parallax-image', {
-			transform: 'translate3d(0,-100px,0)',
-			height: 'calc(100% + 200px)',
-			top: "-100px",
-		})
-		ScrollTrigger.config({
-			ignoreMobileResize: true
-		});
-		gsap.to('.parallax-image', {
-			scrollTrigger: {
-				scrub: true,
-				trigger: '.parallax-image-wrapper',
-				start: "top bottom",
-				
-				end: "bottom top",
-				//markers: true,
-				//invalidateOnRefresh: true,
-				ignoreMobileResize: true,
-			},
-			transform: 'translate3d(0,100px,0)',
-			ease: "none",
-		})
-
-		/* gsap.set('.parallax-image-wrapper', {
-			clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-		}) */
-
-		
-	});
-
-	/* gsap.to('.parallax-image-wrapper picture', {
-		scrollTrigger: {
-			trigger: '.parallax-image-wrapper',
-			start: "top bottom",
-		},
-		clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
-		duration: 1,
-		delay: 2,
-		ease: "power4.out",
-	}) */
-
-	const animSections = document.querySelectorAll('.anim-section');
-	animSections.forEach(animSection => {
-		let timeline = gsap.timeline({
-			scrollTrigger: {
-				trigger: animSection,
-				start: 'top center',
-				//markers: true,
-			},
-		});
-
-		/* const sectionNames = animSection.querySelectorAll('.section-name');
-		sectionNames.forEach(sectionName => {
-			timeline.to(sectionName, {
-				opacity: 1,
-				duration: 1,
-				delay: 0.1,
-				ease: "power3.out",
-			})
-		}) */
-		
-		const lines = animSection.querySelectorAll('.anim-text.split-text .line-body');
-		if(lines.length) {
-			timeline.to(lines, {
-				transform: 'translate3d(0,0,0)',
-				duration: 1,
-				delay: 0.2,
-				stagger: 0.15,
-				ease: "power3.out",
-			})
-		}
-		
-
-		const lines2 = animSection.querySelectorAll('.anim-text-2.split-text .line-body');
-		if(lines2.length) {
-			timeline.to(lines2, {
-				transform: 'translate3d(0,0,0)',
-				duration: 0.5,
-				stagger: 0.1,
-				ease: "power3.out",
-			},"-=1.2")
-		}
-
-		const fadeIn = animSection.querySelectorAll('.fade-in');
-		fadeIn.forEach(fadeIn => {
-			timeline.to(fadeIn, {
-				/* scrollTrigger: {
-					trigger: fadeDown,
-					start: 'top bottom'
-				}, */
-				duration: 1,
-				opacity: 1,
-			},"-=0.5")
-		})
-
-		const fadeDown = animSection.querySelectorAll('.fade-down');
-		fadeDown.forEach(fadeDown => {
-			timeline.to(fadeDown, {
-				/* scrollTrigger: {
-					trigger: fadeDown,
-					start: 'top bottom'
-				}, */
-				duration: 1,
-				opacity: 1,
-				transform: 'translate3d(0,0,0)',
-			},"-=0.5")
-		})
-
-		//console.log(timeline)
-
-		//timeline.play()
-		
-	})
-
-	/* const sections = document.querySelectorAll('section');
-	sections.forEach(section => {
-		
-	}) */
-
-	let marquee = document.querySelectorAll('.marquee__item');
-	marquee.forEach(marquee => {
-		let marqueeElements = marquee.querySelectorAll(".marquee__item--element"),
-		speed = Number(marquee.dataset.marqueeSpeed),
-		goNext = marquee.dataset.marqueeGoNext == "false" ? false : true;
-
-		new LoopingElement(marqueeElements[0], 0, speed, goNext);
-		new LoopingElement(marqueeElements[1], -100, speed, goNext);
-	})
-	
-
-	const minMarquees = document.querySelectorAll('[data-append-marquee]');
-	minMarquees.forEach(minMarquee => {
-		const marquee = document.createElement('div');
-		marquee.innerHTML = `<span>${minMarquee.dataset.appendMarquee}</span><span>${minMarquee.dataset.appendMarquee}</span>`;
-		marquee.classList.add('min-marquee');
-		marquee.classList.add('text');
-		minMarquee.append(marquee);
-	})
-
-	const blogCursor = document.querySelector('.blog__cursor'),
-	blogItem = document.querySelectorAll('.blog__item');
-
-	const blogWrapper = document.querySelector('.blog__wrapper');
-
-	let xTo = gsap.quickTo(blogCursor, "x", {duration: 0.3, ease: "power3"}),
-    yTo = gsap.quickTo(blogCursor, "y", {duration: 0.3, ease: "power3"});
-
-	blogWrapper.addEventListener('pointermove', function (event) {
-		xTo(event.clientX);
-		yTo(event.clientY);
-	})
-
-	blogWrapper.addEventListener('pointerenter', function (event) {
-		gsap.set(blogCursor, {x: event.clientX, duration: 0, ease: "power3"});
-		gsap.set(blogCursor, {y: event.clientY, duration: 0, ease: "power3"});
-		blogCursor.classList.add('_hover');
-	});
-
-	blogWrapper.addEventListener('pointerleave', function (event) {
-		blogCursor.classList.remove('_hover');
-	})
-
-	setTimeout(() => {
-		
-		
-	},200)
-
-	blogItem.forEach((blogItem, index) => {
-		blogItem.addEventListener('pointerenter', function (event) {
-			blogCursor.dataset.index = index;
-			blogItem.classList.add('_hover');
-		})
-		blogItem.addEventListener('pointerleave', function (event) {
-			//blogItem.classList.remove('_hover');
-		})
-	})
-
-	setTimeout(() => {
-		
-		ScrollTrigger.refresh();
-		
 	},100)
 
 	
 
 })
 
-
-
-
-
 // =-=-=-=-=-=-=-=-=-=-=-=- </animation> -=-=-=-=-=-=-=-=-=-=-=-=
-
-
-
-// =-=-=-=-=-=-=-=-=-=-=-=- <slider> -=-=-=-=-=-=-=-=-=-=-=-=
-
-if(document.querySelector('.process__bg-slider') && document.querySelector('.process__slider')) {
-
-	const processSlider = new Splide( '.process__slider', {
-		type: 'fade',
-		speed: 1000,
-		pagination: false,
-		rewind: true,
-		arrows: true,
-	});
-
-	processSlider.on('mounted', function (event) {
-		setTimeout(() => {
-			//console.log(processSlider.root.querySelectorAll('.splide__slide.is-active .title.split-text .line-body'))
-			gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .title.split-text .line-body'), {
-				scrollTrigger: {
-					trigger: processSlider.root,
-					start: "top bottom",
-				},
-				transform: 'translate3d(0,0,0.0001px)',
-				duration: 0.7,
-				stagger: 0.07,
-			})
-			gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .text.split-text .line-body'), {
-				scrollTrigger: {
-					trigger: processSlider.root,
-					start: "top bottom",
-				},
-				transform: 'translate3d(0,0,0.0001px)',
-				duration: 0.7,
-				delay: 0.5,
-				stagger: 0.07,
-			})
-			gsap.to(processSlider.root.querySelector('.splide__slide.is-active .min-marquee'), {
-				scrollTrigger: {
-					trigger: processSlider.root,
-					start: "top bottom",
-				},
-				opacity: 1,
-				duration: 0.7,
-				delay: 0.7,
-			})
-		},500)
-	})
-
-	//processSlider.sync(processBgSlider);
-	processSlider.mount();
-
-	const canvas = document.querySelector('.process__bg-slider--canvas');
-	
-	const ctx = canvas.getContext("2d");
-	const images = document.querySelectorAll('.process__bg-slider--image'),
-	imagesArray = [];
-	images.forEach(image => {
-		const img = new Image();
-		imagesArray.push(img);
-	})
-	
-	function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
-
-		if (arguments.length === 2) {
-			x = y = 0;
-			w = ctx.canvas.width;
-			h = ctx.canvas.height;
-		}
-	
-		// default offset is center
-		offsetX = typeof offsetX === "number" ? offsetX : 0.5;
-		offsetY = typeof offsetY === "number" ? offsetY : 0.5;
-	
-		// keep bounds [0.0, 1.0]
-		if (offsetX < 0) offsetX = 0;
-		if (offsetY < 0) offsetY = 0;
-		if (offsetX > 1) offsetX = 1;
-		if (offsetY > 1) offsetY = 1;
-	
-		var iw = img.width,
-			ih = img.height,
-			r = Math.min(w / iw, h / ih),
-			nw = iw * r,   // new prop. width
-			nh = ih * r,   // new prop. height
-			cx, cy, cw, ch, ar = 1;
-	
-		// decide which gap to fill    
-		if (nw < w) ar = w / nw;                             
-		if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
-		nw *= ar;
-		nh *= ar;
-	
-		// calc source rectangle
-		cw = iw / (nw / w);
-		ch = ih / (nh / h);
-	
-		cx = (iw - cw) * offsetX;
-		cy = (ih - ch) * offsetY;
-	
-		// make sure source rectangle is valid
-		if (cx < 0) cx = 0;
-		if (cy < 0) cy = 0;
-		if (cw > iw) cw = iw;
-		if (ch > ih) ch = ih;
-	
-		// fill image in dest. rectangle
-		ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
-	}
-	
-	function checkDirection(newIndex, prevIndex, slidesLength) {
-		if(newIndex > prevIndex && (prevIndex != slidesLength && newIndex != 0)) {
-			if(prevIndex == 0 && newIndex == slidesLength) {
-				return "prev";	
-			} else {
-				return "next";
-			}
-		} else if(prevIndex == slidesLength && newIndex == 0) {
-			return "next";
-		} else if(newIndex < prevIndex && newIndex != 0) {
-			return "prev";
-		} else {
-			return "prev";
-		}
-	}
-
-	
-	let lastWidthScreen = window.innerWidth;
-	window.addEventListener('resize', function (event) {
-		if(lastWidthScreen != window.innerWidth) {
-			lastWidthScreen = window.innerWidth;
-			canvas.width = canvas.offsetWidth;
-			canvas.heigh = canvas.offsetHeight;
-		}
-		
-	})
-
-
-	
-	processSlider.on('moved', function (newIndex, prevIndex) {
-		setTimeout(() => {
-
-			canvas.width = canvas.offsetWidth;
-			canvas.height = canvas.offsetHeight;
-			
-			/* if(newIndex > prevIndex) {
-				console.log('next');
-				//currentIndex = newIndex;
-			} else if(currentIndex >= prevIndex) {
-				console.log('next');
-			} else {
-				console.log('prev');
-			}
-			currentIndex = newIndex; */
-			/*  else {
-				if(newIndex == 0 && prevIndex != 0) {
-					console.log('prev');
-					currentIndex = newIndex;
-				}
-				
-			} */
-			//console.log(newIndex + ' ' + prevIndex)
-			
-			if(checkDirection(newIndex, prevIndex, processSlider.length-1) == 'next') {
-				//nextSlide(imagesArray[prevIndex], imagesArray[newIndex]);
-				let size = Math.max(canvas.width, canvas.height);
-		
-				function anim(arg) {
-					ctx.clearRect(0,0,canvas.width, canvas.height)
-					ctx.save();
-
-					drawImageProp(ctx, imagesArray[prevIndex], arg.imagePos, 0, canvas.width, canvas.height);
-					ctx.fillStyle = `rgba(0,0,0,${arg.imageOpacity})`;
-					ctx.rect(0, 0, canvas.width, canvas.height);
-					ctx.fill();
-					//coverImg(imageCurrent, "cover");
-					ctx.beginPath();
-					
-					ctx.arc(arg.clipPosX, canvas.height / 2, size, 0, Math.PI * 2);
-					
-					ctx.clip();
-					
-					
-					//ctx.drawImage(imageNext, 0, -window.innerHeight/2, canvas.offsetWidth, canvas.offsetWidth);
-					drawImageProp(ctx, imagesArray[newIndex], 0, 0, canvas.width, canvas.height);
-					
-					//coverImg(imageNext, "cover");
-					ctx.restore();
-					
-				}
-				
-				let arg = {
-					clipPosX: -(size),
-					imagePos: 0,
-					imageOpacity: 0,
-					//width: canvas.offsetWidth/4,
-				}
-				
-				anim(arg);
-
-				gsap.to(arg, {
-					imageOpacity: 0.5,
-					duration: 1,
-					
-					delay: 0.3,
-					ease: "power4.inOut",
-				})
-
-				if(windowSize > 550) {
-					gsap.to(arg, {
-						duration: 1.5,
-						imagePos: canvas.width / 3,
-						delay: 0.3,
-						ease: "power4.inOut",
-					})
-				}
-
-				/* if(windowSize > 550) {
-					gsap.to(arg, {
-						duration: 1.5,
-						imagePos: -(canvas.width / 3),
-						delay: 0.3,
-						ease: "power4.inOut",
-					})
-				} */
-
-				
-
-				gsap.to(arg, {
-					clipPosX: window.innerWidth/14,
-					
-					//imageOpacity: 0.5,
-					
-					duration: 2,
-					ease: "power4.inOut",
-					onUpdate: function (event) {
-						anim(arg);
-					}
-				})
-			} else {
-				//prevSlide(imagesArray[prevIndex], imagesArray[newIndex]);
-				let size = Math.max(canvas.width, canvas.height);
-		
-				function anim(arg) {
-					
-					ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight)
-					ctx.save();
-
-					drawImageProp(ctx, imagesArray[prevIndex], arg.imagePos, 0, canvas.width, canvas.height);
-					ctx.fillStyle = `rgba(0,0,0,${arg.imageOpacity})`;
-					ctx.rect(0, 0, canvas.width, canvas.height);
-					ctx.fill();
-
-					ctx.beginPath();
-					
-					ctx.arc(arg.clipPosX, canvas.height/2, size, 0, Math.PI * 2);
-					
-					ctx.clip();
-					//ctx.drawImage(imageNext, 0, -window.innerHeight/2, canvas.offsetWidth, canvas.offsetWidth);
-					drawImageProp(ctx, imagesArray[newIndex], 0, 0, canvas.width, canvas.height);
-					
-					//coverImg(imagePrev, "cover");
-					ctx.restore();
-					
-				}
-				
-				let arg = {
-					clipPosX: size + canvas.width,
-					imagePos: 0,
-					imageOpacity: 0,
-				}
-				
-				//anim(arg);
-
-				gsap.to(arg, {
-					imageOpacity: 0.5,
-					duration: 1,
-					
-					delay: 0.3,
-					ease: "power4.inOut",
-				})
-
-				if(windowSize > 550) {
-					gsap.to(arg, {
-						duration: 1.5,
-						imagePos: -(canvas.width / 3),
-						delay: 0.3,
-						ease: "power4.inOut",
-					})
-				}
-
-				gsap.to(arg, {
-					clipPosX: canvas.width - window.innerWidth/14,
-					duration: 2,
-					ease: "power4.inOut",
-					onUpdate: function (event) {
-						anim(arg);
-					},
-					/* onComplete: function (event) {
-						alert('slide')
-					} */
-				})
-			}
-
-			setTimeout(() => {
-				if(window.innerWidth > 550) {
-					gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .title.split-text .line-body'), {
-						transform: 'translate3d(0,0,0.0001px)',
-						duration: 0.7,
-						stagger: 0.07,
-					})
-					gsap.to(processSlider.root.querySelectorAll('.splide__slide.is-active .text.split-text .line-body'), {
-						transform: 'translate3d(0,0,0.0001px)',
-						duration: 0.7,
-						delay: 0.5,
-						stagger: 0.07,
-					})
-					gsap.to(processSlider.root.querySelector('.splide__slide.is-active .min-marquee'), {
-						opacity: 1,
-						duration: 0.7,
-						delay: 0.7,
-					})
-					gsap.set(processSlider.root.querySelectorAll('.splide__slide:not(.is-active) .title.split-text .line-body, .splide__slide:not(.is-active) .text.split-text .line-body'), {
-						transform: 'translate3d(0,120%,0.0001px)',
-					})
-					
-				} else {
-					gsap.to(processSlider.root.querySelector('.splide__slide.is-active .min-marquee'), {
-						opacity: 1,
-						duration: 0.7,
-						delay: 0.3,
-					})
-				}
-				
-				gsap.set(processSlider.root.querySelector('.splide__slide:not(.is-active) .min-marquee'), {
-					opacity: 0,
-				})
-			},700)
-			
-			/* if(newIndex > prevIndex) {
-				
-			} else {
-				prevSlide(imagesArray[index], (imagesArray[index+1]) ? imagesArray[index+1] : imagesArray[0]);
-			} */
-			
-		},0)
-	})
-
-	
-
-	/* setTimeout(() => {
-		ctx.clearRect(0,0,canvas.width, canvas.height)
-		ctx.save();
-		drawImageProp(ctx, imagesArray[0], 0, 0, canvas.height, canvas.height);	
-		//ctx.restore();
-	},1000) */
-
-	imagesArray[0].addEventListener('load', function (event) {
-		setTimeout(() => {
-			canvas.width = canvas.offsetWidth;
-			canvas.height = canvas.offsetHeight;
-			ctx.clearRect(0,0,canvas.width, canvas.height)
-			ctx.save();
-			drawImageProp(ctx, imagesArray[0], 0, 0, canvas.width, canvas.height);
-			ctx.restore();
-			
-			/* drawImageProp(ctx, imagesArray[0], 0, 0, canvas.width, canvas.height);
-			drawImageProp(ctx, imagesArray[1], 0, 0, canvas.width, canvas.height); */
-		},500)
-	})
-
-	images.forEach((image, index) => {
-		imagesArray[index].src = image.dataset.url;
-	})
-
-}
-
-// =-=-=-=-=-=-=-=-=-=-=-=- </slider> -=-=-=-=-=-=-=-=-=-=-=-=
 
 
 
@@ -779,32 +1168,62 @@ body.addEventListener('click', function (event) {
 
 	const headerBurger = $('.header__burger');
 	if (headerBurger) {
+
+		gsap.set('.header__nav--list > li > a .line-body', {
+			transform: 'translate3d(0,110%,0)',
+		})
+
+		html.style.setProperty('--popup-padding', window.innerWidth - body.offsetWidth + 'px');
 		menu.forEach(element => {
 			element.classList.toggle('_mob-menu-active')
 		})
 
 		if(headerBurger.classList.contains('_mob-menu-active')) {
-			setTimeout(() => {
-				gsap.to('.header__nav--list > li > a .line-body', {
-					transform: 'translate3d(0,0,0)',
-					duration: 1,
-					stagger: 0.1,
-					ease: "power4.out",
-				})
-			},100)
-		} else {
-			setTimeout(() => {
-				if(!headerBurger.classList.contains('_mob-menu-active')) {
-					gsap.set('.header__nav--list > li > a .line-body', {
-						transform: 'translate3d(0,110%,0)',
-					})
-				}
-			},300)
+			gsap.to('.header__nav--list > li > a .line-body', {
+				transform: 'translate3d(0,0,0)',
+				duration: 1,
+				stagger: 0.1,
+				ease: "power4.out",
+			})
 		}
 	}
 
 	// =-=-=-=-=-=-=-=-=-=- </open menu in header> -=-=-=-=-=-=-=-=-=-=-
 
+
+	// =-=-=-=-=-=-=-=-=-=-=-=- <click> -=-=-=-=-=-=-=-=-=-=-=-=
+	
+	const headerNavListLink = $(".header__nav--list a")
+	if(headerNavListLink) {
+	
+		event.preventDefault();
+		menu.forEach(element => {
+			element.classList.remove('_mob-menu-active')
+		})
+
+		setTimeout(() => {
+			if(smoother) {
+				smoother.scrollTo(headerNavListLink.getAttribute('href'), true, "top -150px");
+				gsap.set('.header__nav--list > li > a .line-body', {
+					transform: 'translate3d(0,110%,0)',
+				})
+			} else {
+				let section;
+			
+				section = document.querySelector(headerNavListLink.getAttribute('href'))
+			
+				if(section) {
+					section.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+				} else {
+					body.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+				}
+			}
+
+		},200)
+	
+	}
+	
+	// =-=-=-=-=-=-=-=-=-=-=-=- </click> -=-=-=-=-=-=-=-=-=-=-=-=
 
 
 	// =-=-=-=-=-=-=-=-=-=-=-=- <mission-accordion> -=-=-=-=-=-=-=-=-=-=-=-=
