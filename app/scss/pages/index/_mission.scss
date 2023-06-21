@@ -4,6 +4,8 @@
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		gap: 0 20px;
+
+		padding-bottom: 155px;
 	}
 
 	// .misson__section-name
@@ -18,21 +20,22 @@
 
 	&__title {
 		
-		margin-top: 14.133333vw;
+		margin-top: 43px;
+		
 		.line:nth-child(2) .line-body {
 			padding-left: 22%;
 		}
 		.line:last-child .line-body {
 			padding-left: 22%;
 		}
-		@include _550 {
-			margin-top: 9.636364vw;
+		@include _650 {
+			margin-top: 8.153846vw;
 		}
 		@include _1000 {
 			grid-column: 12 span;
 			margin-top: -0.6ch; margin-right: -1ch;
 			.line:first-child .line-body {
-				padding-left: 15%;
+				padding-left: 16%;
 			}
 			.line:nth-child(2) .line-body {
 				padding-left: 0;
@@ -66,10 +69,10 @@
 
 	&__accordion {
 
-		margin-top: 12.8vw;
+		margin-top: 48px;
 
 		@include _550 {
-			margin-top: 8.727273vw;
+			margin-top: 7.384615vw;
 		}
 
 		@include _1000 {
@@ -80,9 +83,9 @@
 		// .misson__accordion--block
 
 		&--block {
-			padding: 5.866667vw 0;
-			@include _550 {
-				padding: 4vw 0;
+			padding: 22px 0;
+			@include _650 {
+				padding: 22px 0;
 			}
 			@include _1000 {
 				padding: 2.292vw 0;
@@ -103,9 +106,9 @@
 
 			background: transparent;
 			font-weight: 400;
-			font-size: 5.866667vw;
+			font-size: 1.375rem;
 			@include _550 {
-				font-size: 4vw;
+				font-size: 7vw;
 			}
 			
 			@include _1000 {

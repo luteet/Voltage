@@ -53,12 +53,12 @@ body {
 
 	//padding-right: var(--popup-padding);
 
-	&._mob-menu-active {
+	/* &._mob-menu-active {
 		overflow: hidden;
 		.wrapper {
 			padding-right: var(--popup-padding);
 		}
-	}
+	} */
 
 	&._popup-active {
 		overflow: hidden;
@@ -67,9 +67,32 @@ body {
 }
 
 .section-margin-top {
-	margin-top: 37.333vw;
+	margin-top: 140px;
+	&._large {
+		margin-top: 190px;
+	}
+	@include _650 {
+		margin-top: 37.333vw;
+	}
 	@include _1000 {
 		margin-top: 19.8vw;
+		&._large {
+			margin-top: 20vw;
+		}
+		&._min {
+			margin-top: 19.8vw;
+		}
+	}
+}
+
+.section-margin-top-min {
+	margin-top: 140px;
+	@include _650 {
+		margin-top: 37.333vw;
+	}
+
+	@include _1000 {
+		margin-top: 16.5vw;
 	}
 }
 
@@ -142,24 +165,10 @@ section {
 
 .parallax-image-wrapper {
 	isolation: isolate;
-	//clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-	/* picture {
-		display: block;
-		position: absolute;
-		left: 0; top: 0;
-		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-	} */
 }
 
 .parallax-image-wrapper img {
 	isolation: isolate;
-	//top: -100px;
-	/* height: calc(100% + 200px);
-	transform: translate3d(0,-100px,0);
-	@include _1000 {
-		height: calc(100% + 400px);
-		transform: translate3d(0,-200px,0);
-	} */
 }
 
 .fade-down {
@@ -201,13 +210,16 @@ section {
 	left: 50%; top: 50%;
 	background: #00FF00;
 	border-radius: 200px;
-	width: 27.466667vw; height: 10.666667vw;
-	@include _550 {
-		width: 17.727273vw; height: 6.272727vw;
+	width: 103px; height: 40px;
+	font-size: 0.875rem;
+	@include _650 {
+		width: 15.846154vw; height: 6.153846vw;
+		font-size: 2.461538vw;
 	}
 	@include _1000 {
 		width: 9.722222vw; height: 3.125vw;
 		border-radius: 2.083333vw;
+		font-size: 1vw;
 	}
 	white-space: nowrap;
 	color: var(--black);
@@ -225,6 +237,14 @@ section {
 		flex-shrink: 0;
 		margin: 0;
 		display: block;
+		font-size: 0.875rem;
+		@include _650 {
+			font-size: 2.461538vw;
+		}
+
+		@include _1000 {
+			font-size: 1vw;
+		}
 		//padding: 10px 20%;
 		min-width: 100%;
 		white-space: nowrap;
@@ -291,7 +311,11 @@ section {
 		height: 2px;
 		background: rgba(255, 255, 255, 0.22);
 
-		margin-bottom: 1.666667vw;
+		margin-bottom: 26px;
+
+		@include _1000 {
+			margin-bottom: 1.666667vw;
+		}
 
 		// .preloader__progress--value
 

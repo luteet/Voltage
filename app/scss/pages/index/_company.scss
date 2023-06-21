@@ -1,25 +1,43 @@
 .company {
 
-	padding-top: 37.333vw;
+	margin-top: 140px;
+
+	@include _650 {
+		margin-top: 37.333vw;
+	}
 
 	@include _1000 {
-		padding-top: 15.667vw;
+		margin-top: 15.667vw;
 
 		display: grid;
 		grid-template-columns: 25% 75%;
+		
 	}
 
 	// .company__section-name
 
 	&__section-name {
-		margin-top: 1.3vw;
+		@include _1000 {
+			margin-top: 1.3vw;
+		}
 	}
 
 	// .company__title
 
 	&__title {
+
+		margin-top: 45px;
+		br {
+			display: none;
+		}
 		
-		margin-top: 12.133vw;
+		@include _650 {
+			margin-top: 8.153846vw;
+			br {
+				display: initial;
+			}
+		}
+
 		.line:nth-child(3) .line-body {
 			padding-left: 20%;
 		}
@@ -45,7 +63,11 @@
 
 	&__text {
 
-		margin-top: 9.067vw;
+		margin-top: 34px;
+
+		@include _650 {
+			margin-top: 5.230769vw;
+		}
 
 		@include _1000 {
 			max-width: 43.8vw;
@@ -61,7 +83,7 @@
 		}
 
 		.line:nth-child(1) .line-body {
-			padding-left: 20%;
+			padding-left: 21.5%;
 		}
 
 		/* .line:nth-child(1), .line:nth-child(2), .line:nth-child(1) .line-body, .line:nth-child(2) .line-body, .line:nth-child(1) {
@@ -78,7 +100,10 @@
 
 	&__footer {
 		grid-column: 2;
-		margin-top: 5.067vw;
+		margin-top: 12px;
+		@include _650 {
+			margin-top: 5.230769vw;
+		}
 		@include _1000 {
 			margin-top: 1.3vw;
 			max-width: 43.8vw;

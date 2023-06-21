@@ -19,9 +19,9 @@
 	// .blog__title
 
 	&__title {
-		margin-top: 14.133333vw;
-		@include _550 {
-			margin-top: 9.636364vw;
+		margin-top: 43px;
+		@include _650 {
+			margin-top: 6.615385vw;
 		}
 		@include _1000 {
 			margin-top: -0.3ch;
@@ -38,13 +38,13 @@
 	// .blog__list
 
 	&__list {
-		margin-top: 9.6vw;
+		margin-top: 39px;
 		
 		display: grid;
-		gap: 6.133333vw;
-		@include _550 {
+		gap: 23px 0;
+		@include _650 {
 			gap: 4.181818vw;
-			margin-top: 6.545455vw;
+			margin-top: 5.538462vw;
 		}
 
 		@include _1000 {
@@ -53,14 +53,31 @@
 		}
 	}
 
+	&__list:hover &__item {
+		@include _1000 {
+			@media (any-hover: hover) {
+				padding: 0 1.388889vw;
+				&:hover {
+					padding: 0;
+				}
+				&--link {
+					opacity: 0.54;
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
 	// .blog__item
 
 	&__item {
 		display: block;
 
-		
 		@include _1000 {
-			padding: 0 1.388889vw;
+			
+			padding: 0;
 			transition: padding .3s ease;
 			cursor: none;
 			&:hover {
@@ -74,10 +91,10 @@
 			
 			border-radius: 1.061632vw;
 
-			padding: 8vw 6.933333vw;
+			padding: 31px 26px 29px;
 
-			@include _550 {
-				padding: 5.454545vw 4.727273vw;
+			@include _650 {
+				padding: 4.615385vw 4vw;
 			}
 
 			display: block;
@@ -86,18 +103,14 @@
 				grid-template-columns: 55% 36vw;
 
 				cursor: none;
-				opacity: 0.54;
+				//opacity: 0.54;
 
-				padding: 3.472222vw 2.777778vw;
+				padding: 3.8vw 2.777778vw;
 			}
 
 			color: var(--white);
 
 			transition: opacity .3s ease;
-
-			&:hover {
-				opacity: 1;
-			}
 		}
 	}
 
@@ -112,26 +125,29 @@
  
 	&__category {
 		display: inline-block;
-		border: 0.066352vw solid rgba(255, 255, 255, 0.2);
-		padding: 1.454545% 3.466667vw;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		padding: 7px 13px;
+		line-height: 135.29%;
 		border-radius: 1000px;
-		font-size: 3.2vw;
+		font-size: 0.75rem;
 
-		margin-right: 4.266667vw;
+		margin-right: 18px;
 
-		@include _550 {
-			font-size: 2.545455vw;
-			padding: 1.454545vw 2.363636vw;
-			margin-right: 2.909091vw;
+		@include _650 {
+			border: 0.066352vw solid rgba(255, 255, 255, 0.2);
+			font-size: 1.846154vw;
+			padding: 1.230769vw 2vw;
+			margin-right: 2.769231vw;
 		}
 
 		@include _1000 {
-			font-size: 0.796222vw;
+			font-size: 0.833333vw;
 			border-radius: 2.05691vw;
-			padding: 0.555556vw 0.833333vw;
-			margin-right: 1.875vw;
+			padding: 0.48vw 0.902778vw;
+			margin-right: 1.944444vw;
 		}
-		line-height: 135.29%;
+
+		
 		text-transform: uppercase;
 
 		
@@ -140,15 +156,16 @@
 	// .blog__duration
 
 	&__duration {
-		font-size: 3.2vw;
+		font-size: 0.875rem;
 		
-		@include _550 {
-			font-size: 2.545455vw;
+		@include _650 {
+			font-size: 2.153846vw;
 			padding: 1.454545vw 2.363636vw;
 		}
 		
 		@include _1000 {
 			font-size: 0.928931vw;
+			padding: 0;
 		}
 		line-height: 135.29%;
 		text-transform: uppercase;
@@ -158,17 +175,17 @@
 	// .blog__min-title
 
 	&__min-title {
-		margin-top: 4.266667vw;
-		font-size: 8.533333vw;
+		margin-top: 15px;
+		font-size: 2rem;
 		
-		@include _550 {
-			margin-top: 2.909091vw;
-			font-size: 5.818182vw;
+		@include _650 {
+			margin-top: 2.769231vw;
+			font-size: 4.923077vw;
 		}
 
 		@include _1000 {
 			margin-top: 2.361111vw;
-			font-size: 2.919486vw;
+			font-size: 3.055556vw;
 		}
 
 		font-family: var(--title-font);
@@ -181,9 +198,9 @@
 	&__content {
 		align-self: center;
 		grid-column: 2; grid-row: 1/5;
-		margin-top: 6.933333vw;
-		@include _550 {
-			margin-top: 4.727273vw;
+		margin-top: 28px;
+		@include _650 {
+			margin-top: 4.923077vw;
 		}
 		@include _1000 {
 			margin-top: 0;
@@ -193,9 +210,9 @@
 	// .blog__footer
 
 	&__footer {
-		margin-top: 6.933333vw;
-		@include _550 {
-			margin-top: 4.727273vw;
+		margin-top: 25px;
+		@include _650 {
+			margin-top: 4vw;
 		}
 		@include _1000 {
 			margin-top: 2.361111vw;
@@ -207,10 +224,10 @@
 	// .blog__date
 
 	&__date {
-		margin-right: 4.266667vw;
+		margin-right: 18px;
 
-		@include _550 {
-			margin-right: 2.909091vw;
+		@include _650 {
+			margin-right: 2.769231vw;
 		}
 
 		@include _1000 {

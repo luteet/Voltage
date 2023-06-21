@@ -13,10 +13,11 @@
 	// .feedback__icon
 
 	&__icon {
-		width: 28.533333vw; height: 19.733333vw;
+		width: 107px; height: 74px;
 
-		@include _550 {
-			width: 19.454545vw; height: 13.454545vw;
+		@include _650 {
+			width: 107px; height: 74px;
+			border-radius: 7.847222vw;
 		}
 		
 		@include _1000 {
@@ -24,7 +25,7 @@
 		}
 
 		background: rgba(255, 255, 255, 0.04);
-		border-radius: 7.847222vw;
+		border-radius: 100px;
 
 		display: flex;
 		align-items: center;
@@ -39,9 +40,10 @@
 	// .feedback__title
 
 	&__title {
-		margin-top: 14.133333vw;
-		@include _550 {
-			margin-top: 9.636364vw;
+		margin-top: 43px;
+		line-height: 100%;
+		@include _650 {
+			margin-top: 6.615385vw;
 		}
 
 		@include _1000 {
@@ -53,7 +55,7 @@
 
 	&__footer {
 
-		margin-top: 14.133333vw;
+		margin-top: 60px;
 		margin-bottom: 10px;
 
 		@include _550 {

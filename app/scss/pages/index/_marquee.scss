@@ -2,6 +2,19 @@
 
 	&:is(footer) {
 		overflow: hidden;
+		margin-bottom: 0;
+	}
+
+	&:is(footer) & {
+		&__container {
+			margin-top: 0px;
+		}
+	}
+
+	margin-bottom: 205px;
+
+	@include _1000 {
+		margin-bottom: 0;
 	}
 
 	// .marquee__title
@@ -13,6 +26,13 @@
 
 	&__container {
 		white-space: nowrap;
+		margin-top: 65px;
+		@include _650 {
+			margin-top: 0;
+		}
+		@include _1000 {
+			margin-top: 0px;
+		}
 		//padding-top: 6vw;/* margin-top: 15vw; */
 	}
 
@@ -35,7 +55,11 @@
 				transform: none;
 			}
 		}
-		height: 14vw; width: 105vw;
+
+		height: 60px; width: 105vw;
+		@include _650 {
+			height: 14vw; width: 105vw;
+		}
 		margin-left: -2.5vw;
 		position: relative;
 		background: var(--accent);
@@ -58,7 +82,10 @@
 			position: absolute;
 			top: 50%;
 			transform: translate3d(var(--x),-50%,0.0001px);
-			font-size: 6.933vw;
+			font-size: 1.75rem;
+			@include _650 {
+				font-size: 4.307692vw;
+			}
 			@include _1000 {
 				font-size: 3.958vw;
 			}
