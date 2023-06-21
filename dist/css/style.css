@@ -383,7 +383,7 @@
 .blog__item--link {
     background: rgba(255,255,255,.04);
     border-radius: 1.061632vw;
-    padding: 31px 26px 29px;
+    padding: 8.266667vw 6.933333vw 7.733333vw;
     display: block;
     color: var(--white);
     transition: opacity .3s ease
@@ -554,7 +554,7 @@
     }
 
     .company__text {
-        max-width: 43.8vw;
+        max-width: 41.8vw;
         margin-top: 3.5vw
     }
 
@@ -564,7 +564,7 @@
 
     .company__footer {
         margin-top: 1.3vw;
-        max-width: 43.8vw
+        max-width: 41.8vw
     }
 
     .company__link {
@@ -2113,7 +2113,7 @@ input:focus::placeholder,textarea:focus::placeholder {
     }
 
     .preloader__block {
-        width: 26.111111vw;
+        width: max(376px,26.111111vw);
         flex: 0 1 auto
     }
 
@@ -2128,7 +2128,7 @@ input:focus::placeholder,textarea:focus::placeholder {
 
     .large-title svg {
         margin-right: 0;
-        width: 6.3vw
+        width: 6.25vw
     }
 
     .text,.text._to-min {
@@ -2164,7 +2164,7 @@ input:focus::placeholder,textarea:focus::placeholder {
         max-width: 24.722222vw;
         width: 100%;
         right: var(--desktop-container-padding);
-        top: 9.333333vw;
+        top: 3.055556vw;
         border-radius: 13.888889vw
     }
 
@@ -2246,7 +2246,7 @@ input:focus::placeholder,textarea:focus::placeholder {
     .hero__text {
         margin-top: 0;
         max-width: 18.819vw;
-        margin-right: 64%;
+        margin-right: 68%;
         padding-left: 0
     }
 

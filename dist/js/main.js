@@ -378,7 +378,7 @@ window.addEventListener('load', function (event) {
 								let timeline = gsap.timeline({
 									scrollTrigger: {
 										trigger: animSection,
-										start: 'top center',
+										start: 'top 75%',
 									},
 								});
 								
@@ -393,7 +393,7 @@ window.addEventListener('load', function (event) {
 										onComplete: function () {
 											if(lines[0].closest('.split-text')) lines[0].closest('.split-text').classList.add('_animated');
 										}
-									})
+									},"-=0.3")
 								}
 					
 								const lines2 = animSection.querySelectorAll('.anim-text-2.split-text:not(._animated) .line-body');
