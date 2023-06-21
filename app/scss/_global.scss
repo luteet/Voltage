@@ -10,8 +10,8 @@
 	--white: #FFF;
 	--black: #18181A;
 
-	--container-padding: 30px;
-	--desktop-container-padding: 80px;
+	--container-padding: max(30px,5.555556vw);
+	--desktop-container-padding: 5.555556vw;
 }
 
 .image-body {
@@ -67,14 +67,11 @@ body {
 }
 
 .section-margin-top {
-	margin-top: 140px;
+	margin-top: 37.333333vw;
 	&._large {
-		margin-top: 190px;
+		margin-top: 50.666667vw;
 	}
 	@include _650 {
-		margin-top: 37.333vw;
-	}
-	@include _1000 {
 		margin-top: 19.8vw;
 		&._large {
 			margin-top: 20vw;
@@ -86,12 +83,9 @@ body {
 }
 
 .section-margin-top-min {
-	margin-top: 140px;
-	@include _650 {
-		margin-top: 37.333vw;
-	}
+	margin-top: 37.333333vw;
 
-	@include _1000 {
+	@include _650 {
 		margin-top: 16.5vw;
 	}
 }
@@ -119,7 +113,7 @@ section {
 	padding-left: var(--container-padding);
 	padding-right: var(--container-padding);
 	
-	@media (min-width: #{$container}px) {
+	@media (min-width: 650px) {
 		padding-left: var(--desktop-container-padding);
 		padding-right: var(--desktop-container-padding);
 	}
@@ -130,16 +124,19 @@ section {
 	display: inline-block;
 	text-align: center;
 	
-	padding: 14px 23px;
+	padding: 0.972222vw 1.597222%;
 
 	color: var(--white);
 	font-weight: 400;
-	font-size: 0.875rem;
+	font-size: 3.733333vw;
+	@include _650 {
+		font-size: 0.972222vw;
+	}
 	line-height: 128.571429%;
 	text-transform: uppercase;
 
 	background: rgba(255, 255, 255, 0.07);
-	border-radius: 30px;
+	border-radius: 2.083333vw;
 
 	transition: background .3s ease;
 	&:hover {
@@ -180,12 +177,22 @@ section {
 	opacity: 0;
 }
 
+.hide-on-mob {
+	display: none;
+	@include _650 {
+		display: initial;
+	}
+}
+
+.visible-on-mob {
+	@include _650 {
+		display: none;
+	}
+}
+
 .link {
 	font-size: max(16px, 4.266667vw);
-	@include _550 {
-		font-size: 2.5vw;
-	}
-	@include _1000 {
+	@include _650 {
 		font-size: 1.111vw;
 		border-bottom: 0.069vw solid var(--white);
 		padding-bottom: 0.278vw;
@@ -210,13 +217,9 @@ section {
 	left: 50%; top: 50%;
 	background: #00FF00;
 	border-radius: 200px;
-	width: 103px; height: 40px;
-	font-size: 0.875rem;
+	width: 27.466667vw; height: 10.666667vw;
+	font-size: 3.733333vw;
 	@include _650 {
-		width: 15.846154vw; height: 6.153846vw;
-		font-size: 2.461538vw;
-	}
-	@include _1000 {
 		width: 9.722222vw; height: 3.125vw;
 		border-radius: 2.083333vw;
 		font-size: 1vw;
@@ -237,12 +240,8 @@ section {
 		flex-shrink: 0;
 		margin: 0;
 		display: block;
-		font-size: 0.875rem;
+		font-size: 3.733333vw;
 		@include _650 {
-			font-size: 2.461538vw;
-		}
-
-		@include _1000 {
 			font-size: 1vw;
 		}
 		//padding: 10px 20%;
@@ -256,10 +255,7 @@ section {
 		> span {
 			display: inline-block;
 			padding-right: 2.666667vw;
-			@include _550 {
-				padding-right: 1.818182vw;
-			}
-			@include _1000 {
+			@include _650 {
 				padding-right: 0.694444vw;
 			}
 		}
@@ -287,7 +283,7 @@ section {
 
 	&__block {
 		flex: 1 1 100%;
-		@include _1000 {
+		@include _650 {
 			width: 26.111111vw;
 			flex: 0 1 auto;
 		}
@@ -311,9 +307,9 @@ section {
 		height: 2px;
 		background: rgba(255, 255, 255, 0.22);
 
-		margin-bottom: 26px;
+		margin-bottom: 6.933333vw;
 
-		@include _1000 {
+		@include _650 {
 			margin-bottom: 1.666667vw;
 		}
 
@@ -337,13 +333,9 @@ section {
 			content: '';
 			display: inline-block;
 			background: var(--accent);
-			width: 7px; height: 7px;
-			border-radius: 1px;
-			@include _1000 {
-				width: 0.486111vw; height: 0.486111vw;
-				border-radius: 0.069444vw;
-			}
-			margin-right: 8px;
+			width: max(0.486111vw, 7px); height: max(0.486111vw, 7px);
+			border-radius: max(1px,0.069444vw);
+			margin-right: max(0.555556vw,8px);
 		}
 
 		&::after {

@@ -669,7 +669,7 @@ window.addEventListener('load', function (event) {
 									argSlide['imagePos'] = 0;
 									argSlide['imageOpacity'] = 0;
 									
-									if(windowSize > 550) {
+									if(windowSize > 650) {
 										tl.to(argSlide, {
 											clipPosX: size - window.innerWidth/14,
 											duration: 0.8,
@@ -680,7 +680,7 @@ window.addEventListener('load', function (event) {
 										})
 									} else {
 										tl.to(argSlide, {
-											clipPosX: size - canvas.width/3,
+											clipPosX: size - canvas.width/2,
 											duration: 1,
 											ease: "power4.inOut",
 											onUpdate: function (event) {
@@ -698,7 +698,7 @@ window.addEventListener('load', function (event) {
 										ease: "power4.inOut",
 									},'-=0.7')
 
-									if(windowSize > 550) {
+									if(windowSize > 650) {
 										tl.to(argSlide, {
 											duration: 1,
 											imagePos: -(canvas.width / 3),
@@ -738,7 +738,7 @@ window.addEventListener('load', function (event) {
 									argSlide['imagePos'] = 0;
 									argSlide['imageOpacity'] = 0;
 
-									if(windowSize > 550) {
+									if(windowSize > 650) {
 										tl.to(argSlide, {
 											clipPosX: size - window.innerWidth/14,
 											duration: 0.8,
@@ -752,7 +752,7 @@ window.addEventListener('load', function (event) {
 										})
 									} else {
 										tl.to(argSlide, {
-											clipPosX: -size + canvas.width + canvas.width/3,
+											clipPosX: -size + canvas.width + canvas.width/2,
 											duration: 1,
 											ease: "power4.inOut",
 											onUpdate: function (event) {
@@ -773,7 +773,7 @@ window.addEventListener('load', function (event) {
 										}
 									},'-=0.7')
 
-									if(windowSize > 550) {
+									if(windowSize > 650) {
 										tl.to(argSlide, {
 											duration: 1,
 											imagePos: canvas.width / 3,
@@ -793,7 +793,7 @@ window.addEventListener('load', function (event) {
 
 								setTimeout(() => {
 									
-									if(window.innerWidth > 550 && activeSlide == processSlider.root.querySelector('.splide__slide.is-active')) {
+									if(window.innerWidth > 650 && activeSlide == processSlider.root.querySelector('.splide__slide.is-active')) {
 										gsap.set(textItems, {
 											transform: 'translate3d(0,120%,0.0001px)',
 										})
@@ -846,7 +846,7 @@ window.addEventListener('load', function (event) {
 
 								setTimeout(() => {
 									processSlider.root.classList.remove('_moving');
-								},(windowSize > 550) ? 1500 : 500)
+								},(windowSize > 650) ? 1500 : 500)
 								
 							},0)
 						})

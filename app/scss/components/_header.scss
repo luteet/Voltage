@@ -16,9 +16,9 @@
 	flex-wrap: wrap;
 	align-items: center;
 
-	padding-top: 30px;
-	@include _1000 {
-		padding-top: 44px;
+	padding-top: 8vw;
+	@include _650 {
+		padding-top: 3.055556vw;
 	}
 
 	// .header__logo
@@ -35,9 +35,9 @@
 		
 		&--img {
 			max-width: 100%;
-			width: 122px; height: auto;
-			@include _1000 {
-				width: 146px;
+			width: 32.533333vw; height: auto;
+			@include _650 {
+				width: 10.138889vw;
 			}
 		}
 	}
@@ -46,16 +46,16 @@
 
 	&__nav {
 		position: absolute;
-		right: var(--container-padding); top: 30px;
+		right: var(--container-padding); top: 8vw;
 		width: calc(100% - (var(--container-padding) * 2)); max-height: calc(var(--svh, 1vh) * 100);
 		
-		@include _1000 {
+		@include _650 {
 			max-width: 24.722222vw;
 			width: 100%;
-		}
 
-		@media (min-width: #{$container}px) {
-			right: var(--desktop-container-padding); top: 35px;
+			right: var(--desktop-container-padding); top: 9.333333vw;
+
+			border-radius: 13.888889vw;
 		}
 
 		background: var(--white);
@@ -64,13 +64,6 @@
 
 		opacity: 0; visibility: hidden;
 		border-radius: 150px;
-		@include _650 {
-			border-radius: 30.769231vw;
-		}
-		@include _1000 {
-			border-radius: 13.888889vw;
-			top: 35px;
-		}
 		transform-origin: right top;
 		transform: scale(0.1) translate(20%,-20%);
 
@@ -78,11 +71,8 @@
 
 		&._mob-menu-active {
 			opacity: 1; visibility: visible;
-			border-radius: 13px;
+			border-radius: 3.466667vw;
 			@include _650 {
-				border-radius: 2vw;
-			}
-			@include _1000 {
 				border-radius: 0.902778vw;
 			}
 			transform: scale(1);
@@ -96,13 +86,9 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 25px;
+			padding: 6.666667vw;
 
 			@include _650 {
-				padding: 3.846154vw;
-			}
-
-			@include _1000 {
 				padding: 1.736111vw;
 			}
 			width: 100%;
@@ -110,13 +96,9 @@
 
 		&--name {
 
-			font-size: 1rem;
+			font-size: 4.266667vw;
 
 			@include _650 {
-				font-size: 2.461538vw;
-			}
-
-			@include _1000 {
 				font-size: 1vw;
 			}
 			line-height: 152.2%;
@@ -131,11 +113,8 @@
 			background: transparent;
 			svg {
 				height: auto;
-				width: 16px;
+				width: 4vw;
 				@include _650 {
-					width: 2.461538vw;
-				}
-				@include _1000 {
 					width: 1vw;
 				}
 			}
@@ -165,7 +144,10 @@
 			align-items: center;
 			justify-content: center;
 
-			padding-bottom: 1.736111vw;
+			padding-bottom: 5.333333vw;
+			@include _650 {
+				padding-bottom: 1.736111vw;
+			}
 			//height: 100%;
 
 		}
@@ -180,19 +162,15 @@
 
 		&--list li a {
 			display: block;
-			padding: 3.5px 25px;
+			padding: 0.933333vw 6.666667vw;
 
 			width: 100%;
 			color: var(--black);
 
-			font-size: 1.5rem;
+			font-size: 6.4vw;
 			line-height: 152.2%;
 			text-transform: capitalize;
 			@include _650 {
-				font-size: 3.692308vw;
-				padding: 3.5px 3.846154vw;
-			}
-			@include _1000 {
 				font-size: 1.666667vw;
 				padding: 3.5px 1.736111vw;
 			}
@@ -211,11 +189,12 @@
 	}
 
 	&__btn {
-		margin-right: 22px;
+		margin-right: 1.527778vw;
 
 		display: none;
-		@include _550 {
+		@include _650 {
 			display: inline-block;
+			
 		}
 	}
 
@@ -224,9 +203,9 @@
 	&__burger {
 		position: relative;
 	
-		width: 28px; height: 34px;
-		@include _1000 {
-			width: 46px; height: 46px;
+		width: 7.466667vw; height: 9.066667vw;
+		@include _650 {
+			width: 3.194444vw; height: 3.194444vw;
 			background: var(--white);
 			border-radius: 50%;
 		}
@@ -252,8 +231,8 @@
 			left: 50%; top: 50%;
 	
 			width: 100%; height: 1px;
-			@include _1000 {
-				width: 50%;
+			@include _650 {
+				width: 45%;
 				background: var(--black);
 			}
 			background: var(--white);
@@ -261,22 +240,21 @@
 			transition-duration: .3s;
 			transition-timing-function: ease;
 			transition-property: transform, top, opacity, visibility;
-
 			&:nth-child(1) {
-				transform: translate3d(-50%,-7px,0);
+				transform: translate3d(-50%,-1.866667vw,0);
 			}
 
 			&:nth-child(2) {
-				transform: translate3d(-50%, 7px, 0);
+				transform: translate3d(-50%, 1.866667vw, 0);
 			}
 	
-			@include _1000 {
+			@include _650 {
 				&:nth-child(1) {
-					transform: translate3d(-50%,-3.5px,0);
+					transform: translate3d(-50%,-0.25vw,0);
 				}
 	
 				&:nth-child(2) {
-					transform: translate3d(-50%, 3.5px, 0);
+					transform: translate3d(-50%, 0.25vw, 0);
 				}
 			}
 

@@ -1,6 +1,6 @@
 .feedback {
 
-	@include _1000 {
+	@include _650 {
 		display: grid;
 		grid-template-columns: minmax(137px, 15%) auto;
 	}
@@ -13,14 +13,9 @@
 	// .feedback__icon
 
 	&__icon {
-		width: 107px; height: 74px;
-
-		@include _650 {
-			width: 107px; height: 74px;
-			border-radius: 7.847222vw;
-		}
+		width: 28.533333vw; height: 19.733333vw;
 		
-		@include _1000 {
+		@include _650 {
 			width: 7.430556vw; height: 5.138889vw;
 		}
 
@@ -40,13 +35,10 @@
 	// .feedback__title
 
 	&__title {
-		margin-top: 43px;
+		margin-top: 11.466667vw;
 		line-height: 100%;
-		@include _650 {
-			margin-top: 6.615385vw;
-		}
 
-		@include _1000 {
+		@include _650 {
 			margin-top: -0.25ch;
 		}
 	}
@@ -55,14 +47,10 @@
 
 	&__footer {
 
-		margin-top: 60px;
-		margin-bottom: 10px;
-
-		@include _550 {
-			margin-top: 9.636364%;
-		}
+		margin-top: 16vw;
+		margin-bottom: 2.666667vw;
 		
-		@include _1000 {
+		@include _650 {
 			margin-top: 5.069444vw;
 		}
 	}

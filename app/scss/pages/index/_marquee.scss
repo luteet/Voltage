@@ -11,9 +11,9 @@
 		}
 	}
 
-	margin-bottom: 205px;
+	margin-bottom: 54.666667vw;
 
-	@include _1000 {
+	@include _650 {
 		margin-bottom: 0;
 	}
 
@@ -26,12 +26,9 @@
 
 	&__container {
 		white-space: nowrap;
-		margin-top: 65px;
+		margin-top: 17.333333vw;
 		@include _650 {
 			margin-top: 0;
-		}
-		@include _1000 {
-			margin-top: 0px;
 		}
 		//padding-top: 6vw;/* margin-top: 15vw; */
 	}
@@ -40,7 +37,7 @@
 
 	&__item {
 
-		@include _1000 {
+		@include _650 {
 			
 			height: 7.917vw;
 			&:nth-child(1) {
@@ -56,10 +53,7 @@
 			}
 		}
 
-		height: 60px; width: 105vw;
-		@include _650 {
-			height: 14vw; width: 105vw;
-		}
+		height: 16vw; width: 105vw;
 		margin-left: -2.5vw;
 		position: relative;
 		background: var(--accent);
@@ -82,11 +76,8 @@
 			position: absolute;
 			top: 50%;
 			transform: translate3d(var(--x),-50%,0.0001px);
-			font-size: 1.75rem;
+			font-size: 7.466667vw;
 			@include _650 {
-				font-size: 4.307692vw;
-			}
-			@include _1000 {
 				font-size: 3.958vw;
 			}
 			line-height: 93.61%;
@@ -103,7 +94,7 @@
 				margin: 0 2vw;
 				fill: var(--black);
 				width: 5.333vw; height: 8vw;
-				@include _1000 {
+				@include _650 {
 					width: 4.028vw; height: 2.708vw;
 				}
 			}

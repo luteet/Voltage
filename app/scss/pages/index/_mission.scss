@@ -1,17 +1,17 @@
 .misson {
 
-	@include _1000 {
+	@include _650 {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		gap: 0 20px;
+		gap: 0 1.388889vw;
 
-		padding-bottom: 155px;
+		padding-bottom: 10.763889vw;
 	}
 
 	// .misson__section-name
 
 	&__section-name {
-		@include _1000 {
+		@include _650 {
 			grid-column: 12 span;
 		}
 	}
@@ -20,7 +20,7 @@
 
 	&__title {
 		
-		margin-top: 43px;
+		margin-top: 11.466667vw;
 		
 		.line:nth-child(2) .line-body {
 			padding-left: 22%;
@@ -28,10 +28,8 @@
 		.line:last-child .line-body {
 			padding-left: 22%;
 		}
+		
 		@include _650 {
-			margin-top: 8.153846vw;
-		}
-		@include _1000 {
 			grid-column: 12 span;
 			margin-top: -0.6ch; margin-right: -1ch;
 			.line:first-child .line-body {
@@ -51,7 +49,7 @@
 	&__image {
 		display: none;
 
-		@include _1000 {
+		@include _650 {
 			display: block;
 			user-select: none; pointer-events: none;
 			grid-column: 7 span;
@@ -69,13 +67,9 @@
 
 	&__accordion {
 
-		margin-top: 48px;
+		margin-top: 12.8vw;
 
-		@include _550 {
-			margin-top: 7.384615vw;
-		}
-
-		@include _1000 {
+		@include _650 {
 			margin-top: 5.416667vw;
 			grid-column: 5 span;
 		}
@@ -83,11 +77,8 @@
 		// .misson__accordion--block
 
 		&--block {
-			padding: 22px 0;
+			padding: 6.133333vw 0;
 			@include _650 {
-				padding: 22px 0;
-			}
-			@include _1000 {
 				padding: 2.292vw 0;
 			}
 			border-top: max(1px, 0.069vw) solid rgba(255, 255, 255, 0.22);
@@ -106,12 +97,8 @@
 
 			background: transparent;
 			font-weight: 400;
-			font-size: 1.375rem;
-			@include _550 {
-				font-size: 7vw;
-			}
-			
-			@include _1000 {
+			font-size: 5.866667vw;
+			@include _650 {
 				font-size: 1.944444vw;
 			}
 			line-height: 152.2%;
@@ -131,10 +118,7 @@
 				right: 0; top: 50%;
 				transform: translate3d(0,-50%,0.0001px);
 				width: 4.533333vw; height: 4.533333vw;
-				@include _550 {
-					width: 3.090909vw; height: 3.090909vw;
-				}
-				@include _1000 {
+				@include _650 {
 					width: 1.528vw; height: 1.528vw;
 				}
 				opacity: .4;
