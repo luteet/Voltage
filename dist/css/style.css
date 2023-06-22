@@ -624,10 +624,8 @@
     }
 
     .misson {
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
-        gap: 0 1.388889vw;
-        padding-bottom: 10.763889vw
+        padding-bottom: 10.763889vw;
+        min-height: 80vw
     }
 
     .misson__title {
@@ -641,6 +639,12 @@
 
     .misson__title .line:last-child .line-body,.misson__title .line:nth-child(2) .line-body {
         padding-left: 0
+    }
+
+    .misson__row {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        gap: 0 1.388889vw
     }
 
     .misson__image {
@@ -835,7 +839,7 @@
     }
 
     .feedback__title {
-        margin-top: -.25ch
+        margin-top: -.2ch
     }
 
     .feedback__footer {

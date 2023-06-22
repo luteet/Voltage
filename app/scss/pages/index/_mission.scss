@@ -1,11 +1,11 @@
 .misson {
 
 	@include _650 {
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		gap: 0 1.388889vw;
+		
 
 		padding-bottom: 10.763889vw;
+
+		min-height: 80vw;
 	}
 
 	// .misson__section-name
@@ -41,6 +41,14 @@
 			.line:last-child .line-body {
 				padding-left: 0;
 			}
+		}
+	}
+
+	&__row {
+		@include _650 {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			gap: 0 1.388889vw;
 		}
 	}
 
