@@ -3,8 +3,9 @@
 	margin-top: 37.333333vw;
 
 	@include _650 {
-		margin-top: 15.667vw;
-
+		margin-top: 16.666667vw;
+		//margin-top: 15.667vw;
+		// 15.667vw
 		display: grid;
 		grid-template-columns: 25% 75%;
 		

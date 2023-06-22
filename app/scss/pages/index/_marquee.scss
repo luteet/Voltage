@@ -3,6 +3,9 @@
 	&:is(footer) {
 		overflow: hidden;
 		margin-bottom: 0;
+		@include _650 {
+			margin-top: 16.666667vw;
+		}
 	}
 
 	&:is(footer) & {

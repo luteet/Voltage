@@ -525,7 +525,7 @@
 
 @media (min-width:650px) {
     .company {
-        margin-top: 15.667vw;
+        margin-top: 16.666667vw;
         display: grid;
         grid-template-columns: 25% 75%
     }
@@ -585,6 +585,10 @@
 
     .misson__section-name,.misson__title {
         grid-column: 12 span
+    }
+
+    .marquee:is(footer) {
+        margin-top: 16.666667vw
     }
 
     .marquee {
@@ -763,7 +767,8 @@
     }
 
     .blog {
-        gap: 0 1.388889vw
+        gap: 0 1.388889vw;
+        margin-top: 16.666667vw
     }
 
     .blog__title {
@@ -830,7 +835,8 @@
 
     .feedback {
         display: grid;
-        grid-template-columns: minmax(137px,15%) auto
+        grid-template-columns: minmax(137px,15%) auto;
+        margin-top: 16.666667vw
     }
 
     .feedback__icon {
