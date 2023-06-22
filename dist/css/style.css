@@ -1438,7 +1438,7 @@ h1,h2,h3,h4,h5,h6 {
     --accent-active: #44be25;
     --white: #FFF;
     --black: #18181A;
-    --container-padding: max(30px,5.555556vw);
+    --container-padding: 8vw;
     --desktop-container-padding: 5.555556vw
 }
 
