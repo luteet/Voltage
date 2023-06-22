@@ -1137,7 +1137,7 @@ window.addEventListener('load', function (event) {
 						
 					},100)
 			
-				},1000)
+				},500)
 			}
 		})
 
